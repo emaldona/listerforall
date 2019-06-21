@@ -34,11 +34,10 @@ To build Capabilities:
     make runJS
         to run the app that displays a brief output
 
-------------
 TODO:
+------------
 This currently only works on Fedora
 - Add support for other Linux destributions
-- Explore using cmake, as JSS does, as it should
-allow us to detect environment variables and thus
-enable supporting other distros
+- Explore using cmake, as JSS does, as it should allow us to detect environment
+  variables and thus make it easier to enable supporting other distros
 
