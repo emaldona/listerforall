@@ -24,14 +24,14 @@ import java.util.Iterator;
  * digests, signatures and other objects for the Mozilla-JSS provider.
  */
 public class CapabilitiesJL {
-
+    /* Needed for the Mozilla-JSS provider */
     static final String nssconf = System.getProperty("user.dir").concat("/nss.cfg");
 
     /**
      * List the the available capabilities for ciphers, key agreement, macs, messages
      * digest, signatures and other objects in the specied provider.
      *
-     * This method is based on an example given by Julien Nicoulaud
+     * This is based on an example given by Julien Nicoulaud
      * @see https://gist.github.com/nicoulaj/531761 
      */
     public static void main(String[] args) {

@@ -24,6 +24,7 @@ import java.util.Iterator;
  * digests, signatures and other objects for the Mozilla-JSS provider.
  */
 public class Capabilities {
+    /* Needed for the Mozilla-JSS provider */
     static final String nssconf = System.getProperty("user.dir").concat("/nss.cfg");
 
     //final Logger logger = LoggerFactory.getLogger(Capabilities.class);
@@ -51,9 +52,10 @@ public class Capabilities {
      * List the the available capabilities for ciphers, key agreement, macs, messages
      * digest, signatures and other objects in the specied provider.
      *
-     * This based on example 1 from Cryptography for Java by David Hook
+     * This is based on example 1 from Cryptography for Java by David Hook
      *
      * @param providerName name of the provider
+     * @throws Exception if the missing provider can't be installed
      */
     public static void listThisOne(String providerName) throws Exception {
 
@@ -87,13 +89,17 @@ public class Capabilities {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        int i = 0;
-        while (providers[i].length() > 0) {
-            String providerName = providers[i];
-            System.out.println("------------" + providerName + "----------");
-            listThisOne(providers[i]);
-            i++;
+    public static void main(String[] args) {
+        try {
+            int i = 0;
+            while (providers[i].length() > 0) {
+                String providerName = providers[i];
+                System.out.println("----" + providerName + "----");
+                listThisOne(providers[i]);
+                i++;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }
