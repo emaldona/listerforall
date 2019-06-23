@@ -1,8 +1,6 @@
-# Change this to where you have build JSS
-export BUILDROOT=${HOME}/buildjss
-export LD_LIBRARY_PATH=${BUILDROOT}/jss/build:/usr/share/java
-
-export CLASSPATH=.:${BUILDROOT}/jss/build/jss4.jar:/usr/share/java/slf4j/api.jar
+# Makefile that uses the system jss in fedora
+export LD_LIBRARY_PATH=/usr/lib64:/usr/lib64/jss:/usr/share/java
+export CLASSPATH=.:/usr/lib/java/jss4.jar:/usr/share/java/slf4j/api.jar
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
@@ -16,7 +14,7 @@ FILE=
 
 
 CLASSES = \
-	Capabilities.java CapabilitiesJL.java Lister.java
+	Lister.java
 
 
 MAIN = Lister
@@ -27,7 +25,8 @@ default: classes
 classes: $(CLASSES:.java=.class)
 
 
-run: listJSS
+run: $(MAIN).class
+	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
 
 listJSS: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
