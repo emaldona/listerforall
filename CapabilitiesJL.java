@@ -54,7 +54,7 @@ public class CapabilitiesJL {
               System.out.println(p[i]);
               for (Enumeration e = p[i].keys(); e.hasMoreElements();)
                   System.out.println("\t" + e.nextElement());
-              }
+           }
         } catch (Exception e) {
             System.out.println(e);
         }
