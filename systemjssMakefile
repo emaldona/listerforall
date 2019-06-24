@@ -1,6 +1,20 @@
-# Makefile that uses the system jss in debian 9
-export LD_LIBRARY_PATH=/usr/lib64:/usr/lib64/jss:/usr/share/java
-export CLASSPATH=.:/usr/share/java/jss-4.3.1.jar:/usr/share/java/slf4j/api.jar
+# Makefile that uses the system jss
+
+# settings to use system jss in fedora 30
+export LIBRARYPATH4FEDORA=/usr/lib64:/usr/lib64/jss:/usr/share/java
+export CLASSPATH4FEDORA=.:/usr/lib/java/jss4.jar:/usr/share/java/slf4j/api.jar
+
+# settings to use system jss in debian 9
+export LIBRARYPATH4DEBIAN9=/usr/lib64:/usr/lib64/jss:/usr/share/java
+export CLASSPATH4DEBIAN9=.:/usr/share/java/jss-4.3.1.jar:/usr/share/java/slf4j/api.jar
+
+# settings to use system jss in openSUSE
+export LIBRARYPATH4OPNSUSE=/usr/lib64:/usr/share/java
+export CLASSPATH4OPNSUSE=.:/usr/lib64/java/jss4-4.5.0.jar:/usr/share/java/slf4j/api.jar
+
+# switch to the one you wish to use
+export LD_LIBRARY_PATH=${LIBRARYPATH4FEDORA}
+export CLASSPATH=${CLASSPATH4FEDORA}
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
