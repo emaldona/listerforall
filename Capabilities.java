@@ -25,7 +25,7 @@ import java.util.Iterator;
  */
 public class Capabilities {
     /* Needed for the Mozilla-JSS provider */
-    static final String nssconf = System.getProperty("user.dir").concat("/nss.cfg");
+    static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
     //final Logger logger = LoggerFactory.getLogger(Capabilities.class);
     static final String[] providers = {
@@ -63,7 +63,7 @@ public class Capabilities {
         if (provider == null) {
             System.out.println(providerName + " not found, will try to install it\n");
             try {
-                CryptoManager.initialize(nssconf);
+                CryptoManager.initialize(initValues);
                 CryptoManager cm = CryptoManager.getInstance();
             } catch (Exception e) {
                 System.out.println(e);

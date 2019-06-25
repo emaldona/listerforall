@@ -24,8 +24,8 @@ import java.util.Iterator;
  * digests, signatures and other objects for the Mozilla-JSS provider.
  */
 public class Lister {
-
-    static final String nssconf = System.getProperty("user.dir").concat("/nss.cfg");
+    /* Needed for the Mozilla-JSS provider */
+    static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
     String providerName;
 
@@ -48,7 +48,7 @@ public class Lister {
         if (provider == null) {
             System.out.println(providerName + " not found, will try to install it\n");
             try {
-                CryptoManager.initialize(nssconf);
+                CryptoManager.initialize(initValues);
                 CryptoManager cm = CryptoManager.getInstance();
             } catch (Exception e) {
                 System.out.println(e);
