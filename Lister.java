@@ -76,7 +76,7 @@ public class Lister {
 
     public static void main(String[] args) throws Exception {
         if (args.length != 1) {
-            System.out.println("Usage: List providerName");
+            System.out.println("Usage: Lister providerName");
         } else {
             System.out.println("Listing: " + args[0]);
             (new Lister(args[0])).listThem();
