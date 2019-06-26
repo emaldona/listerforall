@@ -19,6 +19,10 @@ import java.security.Provider;
 import java.security.Security;
 import java.util.Iterator;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * List the available capablities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
@@ -70,7 +74,9 @@ public class Capabilities {
                 return;
             }
         }
-        System.out.println( "Capabilities of " + providerName);
+        String fileName = "Capabilities4" + providerName + ".txt";
+        FileWriter fw = new FileWriter(new File(fileName));
+        fw.write(String.format("Capabilities of %s\n.", providerName));
         Set<Object> keySet = provider.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
@@ -85,21 +91,19 @@ public class Capabilities {
             String factoryClass = entry.substring(0, entry.indexOf('.'));
             String name = entry.substring(factoryClass.length()+1);
             assert(name != null);
-            System.out.println("\t" + factoryClass + ": " + name);
+            fw.write(String.format("\t %s : %s", factoryClass, name));
+            fw.write(System.lineSeparator()); //new line
         }
+        fw.close();
     }
 
-    public static void main(String[] args) {
-        try {
-            int i = 0;
-            while (providers[i].length() > 0) {
-                String providerName = providers[i];
-                System.out.println("----" + providerName + "----");
-                listThisOne(providers[i]);
-                i++;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+    public static void main(String[] args) throws Exception {
+        
+        int i = 0;
+        while (providers[i].length() > 0) {
+            String providerName = providers[i];
+            listThisOne(providers[i]);
+            i++;
         }
     }
 }

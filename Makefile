@@ -29,6 +29,9 @@ classes: $(CLASSES:.java=.class)
 
 run: listJSS
 
+listAll: Capabilities.class
+	$(JVM) -classpath ${CLASSPATH} Capabilities
+
 listJSS: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
 
