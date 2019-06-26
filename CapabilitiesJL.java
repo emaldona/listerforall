@@ -43,7 +43,7 @@ public class CapabilitiesJL {
                 CryptoManager.initialize(initValues);
                 CryptoManager cm = CryptoManager.getInstance();
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
                 return;
             }
         }
