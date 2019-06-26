@@ -88,6 +88,11 @@ SunJdkSASL: $(MAIN).class
 SunPKCS11: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunPKCS11
 
+#
+# List capabilities for all the providers
+#
+listAll: JSS SUN SunRsaSign SunEC SunJSSE SunJCE SunJGSS SunASL \
+	XMLDsig SunPCSC JdkLDAP SunJdkSASL SunPKCS11
 
 clean:
 	$(RM) *.class
