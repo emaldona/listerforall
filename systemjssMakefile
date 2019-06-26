@@ -46,6 +46,9 @@ classes: $(CLASSES:.java=.class)
 run: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
 
+#
+# Targets to list capabities of a provider
+#
 JSS: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
 

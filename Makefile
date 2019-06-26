@@ -27,50 +27,56 @@ default: classes
 classes: $(CLASSES:.java=.class)
 
 
-run: listJSS
+run: JSS
 
-listAll: Capabilities.class
-	$(JVM) -classpath ${CLASSPATH} Capabilities
-
-listJSS: $(MAIN).class
+#
+# Targets to list capabities of a provider
+#
+JSS: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
 
-listSUN: $(MAIN).class
+SUN: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SUN
 
-listSunRsaSign: $(MAIN).class
+SunRsaSign: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunRsaSign
 
-listSunEC: $(MAIN).class
+SunEC: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunEC
 
-listSunJSSE: $(MAIN).class
+SunJSSE: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunJSSE
 
-listSunJCE: $(MAIN).class
+SunJCE: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunJCE
 
-listSunJGSS: $(MAIN).class
+SunJGSS: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunJGSS
 
-listSunASL: $(MAIN).class
+SunASL: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunSASL
 
-listXMLDsig: $(MAIN).class
+XMLDsig: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) XMLDSig
 
-listSunPCSC: $(MAIN).class
+SunPCSC: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunPCSC
 
-listJdkLDAP: $(MAIN).class
+JdkLDAP: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) JdkLDAP
 
-listSunJdkSASL: $(MAIN).class
+SunJdkSASL: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) JdkSASL
 
-listSunPKCS11: $(MAIN).class
+SunPKCS11: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunPKCS11
 
+#
+# This one invokes Capabilities with no arguments
+# so it lists capabilities for all the providers
+#
+listAll: Capabilities.class
+	$(JVM) -classpath ${CLASSPATH} Capabilities
 
 clean:
 	$(RM) *.class
