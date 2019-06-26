@@ -70,7 +70,7 @@ public class Capabilities {
                 CryptoManager.initialize(initValues);
                 CryptoManager cm = CryptoManager.getInstance();
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
                 return;
             }
         }
@@ -98,7 +98,6 @@ public class Capabilities {
     }
 
     public static void main(String[] args) throws Exception {
-        
         int i = 0;
         while (providers[i].length() > 0) {
             String providerName = providers[i];

@@ -19,6 +19,10 @@ import java.security.Provider;
 import java.security.Security;
 import java.util.Iterator;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * List the available capablities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
@@ -37,10 +41,10 @@ public class Lister {
      * List the the available capabilities for ciphers, key agreement, macs, messages
      * digest, signatures and other objects in the specied provider.
      *
-     * This based on example 1 from Cryptography for Java by David Hook
+     * This is based on example 1 from Cryptography for Java by David Hook
      *
      * @param providerName name of the provider
-     * @throws Exception if the provider can't be installed
+     * @throws Exception if the missing provider can't be installed
      */
     public void listThem() throws Exception {
 
@@ -51,11 +55,13 @@ public class Lister {
                 CryptoManager.initialize(initValues);
                 CryptoManager cm = CryptoManager.getInstance();
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
                 return;
             }
         }
-        System.out.println( "Capabilities of " + providerName);
+        String fileName = "Capabilities4" + providerName + ".txt";
+        FileWriter fw = new FileWriter(new File(fileName));
+        fw.write(String.format("Capabilities of %s\n.", providerName));
         Set<Object> keySet = provider.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
@@ -70,8 +76,10 @@ public class Lister {
             String factoryClass = entry.substring(0, entry.indexOf('.'));
             String name = entry.substring(factoryClass.length()+1);
             assert(name != null);
-            System.out.println("\t" + factoryClass + ": " + name);
+            fw.write(String.format("\t %s : %s", factoryClass, name));
+            fw.write(System.lineSeparator()); //new line
         }
+        fw.close();
     }
 
     public static void main(String[] args) throws Exception {
