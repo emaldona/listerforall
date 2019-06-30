@@ -1,6 +1,6 @@
-# Core of capabilties building
+# Core of capabilities building
 
-# Build capabilties; high level flow
+# Build capabilities; high level flow
 macro(capabilities_build)
     # "set(..)" in CMake defines a globally-scoped variable (or more
     # precisely, a variable that exists in all scopes _after_ this one)
@@ -14,7 +14,7 @@ macro(capabilities_build)
     # prior to building again.
     capabilities_build_globs()
 
-    # To build capabilties, we need:
+    # To build capabilities, we need:
     #   1. To build the Java files.
     #   2. To copy the headers for compilation. -- N/A
     #   3. To build the library. -- N/A       

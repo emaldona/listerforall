@@ -1,5 +1,5 @@
 macro(capabilities_config)
-    # Set the current capabilties release number. Arguments are:
+    # Set the current capabilities release number. Arguments are:
     #   MAJOR MINOR PATCH BETA
     # When BETA is zero, it isn't a beta release.
     capabilities_config_version(1 0 0 1)
@@ -16,7 +16,7 @@ macro(capabilities_config)
 endmacro()
 
 macro(capabilities_config_version MAJOR MINOR PATCH BETA)
-    # This sets the capabilties Version for use in CMake and propagates it to the
+    # This sets the capabilities Version for use in CMake and propagates it to the
     # necessary source locations. These are:
     #
     #   org/mozilla/jss/util/jssver.h{.in,}
@@ -53,7 +53,7 @@ endmacro()
 macro(capabilities_config_outputs)
     # Global variables representing various output files; note that these are
     # created at the end of this macro.
-    set(CLASSES_OUTPUT_DIR "${CMAKE_BINARY_DIR}/classes/capabilties")
+    set(CLASSES_OUTPUT_DIR "${CMAKE_BINARY_DIR}/classes/capabilities")
     set(DOCS_OUTPUT_DIR "${CMAKE_BINARY_DIR}/docs")
     set(LIB_OUTPUT_DIR "${CMAKE_BINARY_DIR}/lib")
     set(BIN_OUTPUT_DIR "${CMAKE_BINARY_DIR}/bin")
