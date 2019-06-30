@@ -1,6 +1,6 @@
 # Change this to where you have build JSS
 export BUILDROOT=${HOME}/buildjss
-export LD_LIBRARY_PATH=${BUILDROOT}/jss/build:/usr/share/java
+export LD_LIBRARY_PATH=${BUILDROOT}/jss/cmake:/usr/share/java
 
 export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:/usr/share/java/slf4j/api.jar
 
