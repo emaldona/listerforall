@@ -47,14 +47,7 @@ macro(capabilities_config_version MAJOR MINOR PATCH BETA)
     endif()
 
     # Template files
-    configure_file(
-        "${PROJECT_SOURCE_DIR}/org/mozilla/jss/util/jssver.h.in"
-        "${PROJECT_SOURCE_DIR}/org/mozilla/jss/util/jssver.h"
-    )
-    configure_file(
-        "${PROJECT_SOURCE_DIR}/lib/MANIFEST.MF.in"
-        "${CMAKE_BINARY_DIR}/MANIFEST.MF"
-    )
+
 endmacro()
 
 macro(capabilities_config_outputs)
