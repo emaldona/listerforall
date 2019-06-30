@@ -14,12 +14,12 @@ macro(capabilities_build)
     # prior to building again.
     capabilities_build_globs()
 
-    # To build JSS, we need:
+    # To build capabilties, we need:
     #   1. To build the Java files.
-    #   2. To copy the headers for compilation.
-    #   3. To build the library.
-    #   4. To build the jar.
-    #   5. To build the javadocs.
+    #   2. To copy the headers for compilation. -- N/A
+    #   3. To build the library. -- N/A       
+    #   4. To build the jar. -- N/A
+    #   5. To build the javadocs. -- N/A
     capabilities_build_java()
     #capabilities_build_jars()
     #capabilities_build_javadocs()

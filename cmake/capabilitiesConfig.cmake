@@ -1,5 +1,5 @@
 macro(capabilities_config)
-    # Set the current JSS release number. Arguments are:
+    # Set the current capabilties release number. Arguments are:
     #   MAJOR MINOR PATCH BETA
     # When BETA is zero, it isn't a beta release.
     capabilities_config_version(1 0 0 1)
@@ -53,12 +53,12 @@ endmacro()
 macro(capabilities_config_outputs)
     # Global variables representing various output files; note that these are
     # created at the end of this macro.
-    set(CLASSES_OUTPUT_DIR "${CMAKE_BINARY_DIR}/classes/jss")
+    set(CLASSES_OUTPUT_DIR "${CMAKE_BINARY_DIR}/classes/capabilties")
     set(DOCS_OUTPUT_DIR "${CMAKE_BINARY_DIR}/docs")
     set(LIB_OUTPUT_DIR "${CMAKE_BINARY_DIR}/lib")
     set(BIN_OUTPUT_DIR "${CMAKE_BINARY_DIR}/bin")
-    set(INCLUDE_OUTPUT_DIR "${CMAKE_BINARY_DIR}/include/jss")
-    set(JNI_OUTPUT_DIR "${CMAKE_BINARY_DIR}/include/jss/_jni")
+    set(INCLUDE_OUTPUT_DIR "${CMAKE_BINARY_DIR}/include/capabilities")
+    set(JNI_OUTPUT_DIR "${CMAKE_BINARY_DIR}/include/capabilities/_jni")
 
     # This folder is for pseudo-locations for CMake targets
     set(TARGETS_OUTPUT_DIR "${CMAKE_BINARY_DIR}/.targets")
@@ -72,8 +72,8 @@ macro(capabilities_config_outputs)
     set(REPRODUCIBLE_TEMP_DIR "${CMAKE_BINARY_DIR}/reproducible")
 
     set(CAPABILTIES_BUILD_JAR "staging.jar")
-    set(CAPABILTIES_JAR "jss${CAPABILTIES_VERSION_MAJOR}.jar")
-    set(CAPABILTIES_SO "libjss${CAPABILTIES_VERSION_MAJOR}.so")
+    set(CAPABILTIES_JAR "capabilities${CAPABILTIES_VERSION_MAJOR}.jar")
+    set(CAPABILTIES_SO "libcapabilities${CAPABILTIES_VERSION_MAJOR}.so")
     set(CAPABILTIES_BUILD_JAR_PATH "${CMAKE_BINARY_DIR}/${CAPABILTIES_BUILD_JAR}")
     set(CAPABILTIES_JAR_PATH "${CMAKE_BINARY_DIR}/${CAPABILTIES_JAR}")
     set(CAPABILTIES_SO_PATH "${CMAKE_BINARY_DIR}/${CAPABILTIES_SO}")
@@ -84,8 +84,8 @@ macro(capabilities_config_outputs)
     # version script so we can test internal methods.
     set(TESTS_CLASSES_OUTPUT_DIR "${CMAKE_BINARY_DIR}/classes/tests")
     set(TESTS_INCLUDE_OUTPUT_DIR "${CMAKE_BINARY_DIR}/include/tests")
-    set(TESTS_JNI_OUTPUT_DIR "${CMAKE_BINARY_DIR}/include/jss/_jni")
-    set(CAPABILTIES_TESTS_JAR "capabilties-jss${CAPABILTIES_VERSION_MAJOR}.jar")
+    set(TESTS_JNI_OUTPUT_DIR "${CMAKE_BINARY_DIR}/include/capabilities/_jni")
+    set(CAPABILTIES_TESTS_JAR "capabilities-tests${CAPABILTIES_VERSION_MAJOR}.jar")
     set(CAPABILTIES_TESTS_SO "${CAPABILTIES_SO}")
     set(CAPABILTIES_TESTS_JAR_PATH "${CMAKE_BINARY_DIR}/${CAPABILTIES_TESTS_JAR}")
     set(CAPABILTIES_TESTS_SO_PATH "${LIB_OUTPUT_DIR}/${CAPABILTIES_TESTS_SO}")
@@ -172,24 +172,20 @@ macro(capabilities_config_ldflags)
         list(INSERT JSS_LD_FLAGS 0 "${PASSED_LD_FLAG}")
     endforeach()
 
-    # This set of flags is specific to building the libjss library.
+    # This set of flags is specific to building the libcapabilities library.
     list(APPEND JSS_LIBRARY_FLAGS "-shared")
     list(APPEND JSS_LIBRARY_FLAGS "-Wl,-z,defs")
     list(APPEND JSS_LIBRARY_FLAGS "-Wl,-soname")
     list(APPEND JSS_LIBRARY_FLAGS "-Wl,${JSS_SO}")
 
-    set(JSS_VERSION_SCRIPT "-Wl,--version-script,${PROJECT_SOURCE_DIR}/lib/jss.map")
+    set(JSS_VERSION_SCRIPT "-Wl,--version-script,${PROJECT_SOURCE_DIR}/lib/capabilities.map")
 
     message(STATUS "JSS LD FLAGS: ${JSS_LD_FLAGS}")
     message(STATUS "JSS LIBRARY FLAGS: ${JSS_LIBRARY_FLAGS}")
 endmacro()
 
 macro(capabilities_config_java)
-    # Find various JARs required by JSS build and test suite
-    find_jar(
-        SLF4J_API_JAR
-        NAMES api slf4j/api slf4j-api
-    )
+    # Find various JARs required by capabilities build and test suite
     find_jar(
         CODEC_JAR
         NAMES apache-commons-codec commons-codec
@@ -203,10 +199,6 @@ macro(capabilities_config_java)
         NAMES jaxb-api
     )
     find_jar(
-        SLF4J_JDK14_JAR
-        NAMES jdk14 slf4j/jdk14 slf4j-jdk14
-    )
-    find_jar(
         JUNIT4_JAR
         NAMES junit4 junit
     )
@@ -216,9 +208,6 @@ macro(capabilities_config_java)
     )
 
     # Validate that we've found the required JARs
-    if(SLF4J_API_JAR STREQUAL "SLF4J_API_JAR-NOTFOUND")
-        message(FATAL_ERROR "Required dependency sfl4j-api.jar not found by find_jar!")
-    endif()
 
     if(CODEC_JAR STREQUAL "CODEC_JAR-NOTFOUND")
         message(FATAL_ERROR "Required dependency apache-commons-codec.jar not found by find_jar!")
@@ -232,10 +221,6 @@ macro(capabilities_config_java)
         message(FATAL_ERROR "Required dependency javaee-jaxb-api.jar not found by find_jar!")
     endif()
 
-    if(SLF4J_JDK14_JAR STREQUAL "SLF4J_JDK14_JAR-NOTFOUND")
-        message(WARNING "Test dependency sfl4j-jdk14.jar not found by find_jar! Tests might not run properly.")
-    endif()
-
     if(JUINT4_JAR STREQUAL "JUNIT4_JAR-NOTFOUND")
         message(FATAL_ERROR "Test dependency junit4.jar not found by find_jar! Tests will not compile.")
     endif()
@@ -245,8 +230,8 @@ macro(capabilities_config_java)
     endif()
 
     # Set class paths
-    set(JAVAC_CLASSPATH "${SLF4J_API_JAR}:${CODEC_JAR}:${LANG_JAR}:${JAXB_JAR}")
-    set(TEST_CLASSPATH "${JSS_JAR_PATH}:${JSS_TESTS_JAR_PATH}:${JAVAC_CLASSPATH}:${SLF4J_JDK14_JAR}:${JUNIT4_JAR}:${HAMCREST_JAR}")
+    set(JAVAC_CLASSPATH "${CODEC_JAR}:${LANG_JAR}:${JAXB_JAR}")
+    set(TEST_CLASSPATH "${JSS_JAR_PATH}:${JSS_TESTS_JAR_PATH}:${JAVAC_CLASSPATH}:${JUNIT4_JAR}:${HAMCREST_JAR}")
 
     message(STATUS "javac classpath: ${JAVAC_CLASSPATH}")
     message(STATUS "tests classpath: ${TEST_CLASSPATH}")

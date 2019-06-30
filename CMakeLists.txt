@@ -19,15 +19,12 @@ if(NOT (DEFINED CMAKE_BUILD_TYPE))
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
-# Find NSPR and NSS Libraries.
-find_package(NSPR REQUIRED)
-find_package(NSS REQUIRED)
+# Find JSS Libraries.
 find_package(JSS REQUIRED)
 
-# Find Java and JNI packages; this sets CMake wariables like
+# Find Java packages; this sets CMake wariables like
 # Java_JAVAC_EXECUTABLE.
 find_package(Java REQUIRED)
-find_package(JNI REQUIRED)
 
 # Since we found Java, include UseJava to provide the find_jar function.
 include(UseJava)
@@ -37,7 +34,7 @@ include(UseJava)
 include(capabilitiesConfig)
 
 # Load capabilitiesCommon module; this defines the capabilities_build() macros which defines
-# the JSS build procedure.
+# the capabilities build procedure.
 include(capabilitiesCommon)
 
 # Load capabilitiesTests module; this defines the capabilities_tests() macro which defines the
