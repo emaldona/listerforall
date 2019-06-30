@@ -2,7 +2,7 @@
 export BUILDROOT=${HOME}/buildjss
 export LD_LIBRARY_PATH=${BUILDROOT}/jss/build:/usr/share/java
 
-export CLASSPATH=.:${BUILDROOT}/jss/build/jss4.jar:/usr/share/java/slf4j/api.jar
+export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:/usr/share/java/slf4j/api.jar
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
