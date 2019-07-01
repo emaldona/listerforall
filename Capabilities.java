@@ -91,12 +91,30 @@ public class Capabilities {
             fw.write(System.lineSeparator()); //new line
         }
         fw.close();
+        System.out.println("Written to " + fileName);
     }
 
     public static void main(String[] args) throws Exception {
         int i = 0;
         while (providers[i].length() > 0) {
             String providerName = providers[i];
+            if (providerName.compareTo("Mozilla-JSS")) {
+        // Stolen from jss lister branch
+        // Before we initialize the CryptoManager, the JSS Provider shouldn't
+        // exist.
+        assert(Security.getProvider("Mozilla-JSS") == null);
+
+        CryptoManager.initialize("");
+        CryptoManager cm = CryptoManager.getInstance();
+        cm.setPasswordCallback(
+             new FilePasswordCallback(System.getProperty("user.dir").concat("/password")));
+
+        // Validate that the CryptoManager registers us as the
+        // default/first provider.
+        Provider p = Security.getProviders()[0];
+        assert(p.getName().equals("Mozilla-JSS"));
+        assert(p instanceof org.mozilla.jss.JSSProvider);
+            }
             listThisOne(providers[i]);
             i++;
         }
