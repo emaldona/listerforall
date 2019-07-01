@@ -32,10 +32,10 @@ FILE=
 
 
 CLASSES = \
-	Lister.java
+	Capabilities.java
 
 
-MAIN = Lister
+MAIN = Capabilities
 
 
 default: classes
