@@ -61,7 +61,7 @@ public class Capabilities {
     }
 
     public static void main(String[] args) throws Exception {
-       if (false) {
+       if (true) {
        // Stolen from jss lister branch
         // Before we initialize the CryptoManager, the JSS Provider shouldn't
         // exist.
