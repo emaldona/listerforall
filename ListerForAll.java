@@ -27,15 +27,15 @@ import java.io.IOException;
  * This is based on example 1 from Cryptography for Java by David Hook
  * It incorporates code from org.mozilla.jss.tests.PSSProvider
  */
-public class Capabilities {
+public class ListerForAll {
     /* Might be needed for the Mozilla-JSS provider */
     static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
     public static void listThisOne(Provider p) throws Exception {
         String pName = p.getName();
-        String fName = pName + "_Capabilities.txt";
+        String fName = pName + "_ListerForAll.txt";
         FileWriter fw = new FileWriter(new File(fName));
-        fw.write(String.format("Capabilities of %s\n.", pName));
+        fw.write(String.format("ListerForAll of %s\n.", pName));
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
@@ -57,7 +57,7 @@ public class Capabilities {
         fw.close();
         File resultsFile = new File(fName);
         assert(resultsFile.exists());
-        System.out.println("Capabilities list written to " + fName);
+        System.out.println("ListerForAll list written to " + fName);
     }
 
     public static void main(String[] args) throws Exception {
