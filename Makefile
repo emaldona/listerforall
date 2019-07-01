@@ -16,7 +16,7 @@ FILE=
 
 
 CLASSES = \
-	Capabilities.java CapabilitiesJL.java Lister.java
+	ListerForAll.java CapabilitiesJL.java Lister.java
 
 
 MAIN = Lister
@@ -74,8 +74,8 @@ SunPKCS11: $(MAIN).class
 #
 # List capabilities for all the providers
 #
-listAll: Capabilities.class
-	$(JVM) -classpath ${CLASSPATH} Capabilities
+listAll: ListerForAll.class
+	$(JVM) -classpath ${CLASSPATH} ListerForAll
 
 clean:
 	$(RM) *.class

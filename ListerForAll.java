@@ -1,4 +1,4 @@
-// TODO: turn it into a module
+//package org.mozilla.jss.tests;
 //
 import java.security.Provider;
 import java.security.Security;
@@ -23,14 +23,14 @@ import java.io.IOException;
  * List the available capablities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
  */
-public class Capabilities {
+public class ListerForAll {
     /* Needed for the Mozilla-JSS provider */
     static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
-    //final Logger logger = LoggerFactory.getLogger(Capabilities.class);
+    //final Logger logger = LoggerFactory.getLogger(ListerForAll.class);
     static final String[] providers = {
         /*
-        -- NullPointerException on provider.keySet on jdk 8
+        -- If NullPointerException on provider.keySet on jdk 8 move them here
         */
         "JdkLDAP",
         "JdkSASL", 
@@ -72,7 +72,7 @@ public class Capabilities {
         }
         String fileName = "Capabilities4" + providerName + ".txt";
         FileWriter fw = new FileWriter(new File(fileName));
-        fw.write(String.format("Capabilities of %s\n.", providerName));
+        fw.write(String.format("ListerForAll of %s\n.", providerName));
         Set<Object> keySet = provider.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
