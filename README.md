@@ -40,4 +40,5 @@ This currently only works on Fedora
 - Add support for other Linux destributions
 - Explore using cmake, as JSS does, as it should allow us to detect environment
   variables and thus make it easier to enable supporting other distros
+- See FailureToFix.tx in the make branch which happens also here.
 
