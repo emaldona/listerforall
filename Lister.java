@@ -76,6 +76,7 @@ public class Lister {
             fw.write(System.lineSeparator()); //new line
         }
         fw.close();
+        System.out.println("Written to " + fileName);
     }
 
     public static void main(String[] args) throws Exception {

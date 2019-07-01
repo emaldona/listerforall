@@ -30,7 +30,7 @@ classes: $(CLASSES:.java=.class)
 run: JSS
 
 #
-# Targets to list capabities of a provider
+# Targets to list capabilities of a provider
 #
 JSS: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
@@ -72,8 +72,7 @@ SunPKCS11: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunPKCS11
 
 #
-# This one invokes Capabilities with no arguments
-# so it lists capabilities for all the providers
+# List capabilities for all the providers
 #
 listAll: Capabilities.class
 	$(JVM) -classpath ${CLASSPATH} Capabilities

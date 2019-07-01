@@ -91,12 +91,14 @@ public class Capabilities {
             fw.write(System.lineSeparator()); //new line
         }
         fw.close();
+        System.out.println("Written to " + fileName);
     }
 
     public static void main(String[] args) throws Exception {
         int i = 0;
         while (providers[i].length() > 0) {
             String providerName = providers[i];
+            System.out.println("Listing: " + providers[i]);
             listThisOne(providers[i]);
             i++;
         }
