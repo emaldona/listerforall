@@ -98,7 +98,7 @@ public class Capabilities {
         int i = 0;
         while (providers[i].length() > 0) {
             String providerName = providers[i];
-            if (providerName.compareTo("Mozilla-JSS")) {
+            if (providerName.compareTo("Mozilla-JSS") == 0) {
         // Stolen from jss lister branch
         // Before we initialize the CryptoManager, the JSS Provider shouldn't
         // exist.

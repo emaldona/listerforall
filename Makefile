@@ -16,10 +16,10 @@ FILE=
 
 
 CLASSES = \
-	Capabilities.java CapabilitiesJL.java Lister.java
+	Capabilities.java
 
 
-MAIN = Lister
+MAIN = Capabilities
 
 
 default: classes
@@ -72,8 +72,7 @@ SunPKCS11: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) SunPKCS11
 
 #
-# This one invokes Capabilities with no arguments
-# so it lists capabilities for all the providers
+# List capabilities for all the providers
 #
 listAll: Capabilities.class
 	$(JVM) -classpath ${CLASSPATH} Capabilities
