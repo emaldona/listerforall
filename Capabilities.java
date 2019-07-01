@@ -19,66 +19,28 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 /**
  * List the available capablities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
+ *
+ * This is based on example 1 from Cryptography for Java by David Hook
+ * It incorporates code from org.mozilla.jss.tests.PSSProvider
  */
 public class Capabilities {
-    /* Needed for the Mozilla-JSS provider */
+    /* Might be needed for the Mozilla-JSS provider */
     static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
-    //final Logger logger = LoggerFactory.getLogger(Capabilities.class);
-    static final String[] providers = {
-        /*
-        -- NullPointerException on provider.keySet on jdk 8
-        */
-        "JdkLDAP",
-        "JdkSASL", 
-        "SunPKCS11",
-        "SUN",
-        "SunRsaSign",
-        "SunEC",
-        "SunJSSE",
-        "SunJCE",
-        "SunJGSS",
-        "SunSASL",
-        "XMLDSig",
-        "SunPCSC",
-        "Mozilla-JSS",
-        ""
-    };
-
-    /**
-     * List the the available capabilities for ciphers, key agreement, macs, messages
-     * digest, signatures and other objects in the specied provider.
-     *
-     * This is based on example 1 from Cryptography for Java by David Hook
-     *
-     * @param providerName name of the provider
-     * @throws Exception if the missing provider can't be installed
-     */
-    public static void listThisOne(String providerName) throws Exception {
-
-        Provider provider = Security.getProvider(providerName);
-        if (provider == null) {
-            System.out.println(providerName + " not found, will try to install it\n");
-            try {
-                CryptoManager.initialize(initValues);
-                CryptoManager cm = CryptoManager.getInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return;
-            }
-        }
-        String fileName = "Capabilities4" + providerName + ".txt";
-        FileWriter fw = new FileWriter(new File(fileName));
-        fw.write(String.format("Capabilities of %s\n.", providerName));
-        Set<Object> keySet = provider.keySet();
+    public static void listThisOne(Provider p) throws Exception {
+        String pName = p.getName();
+        String fName = pName + "_Capabilities.txt";
+        FileWriter fw = new FileWriter(new File(fName));
+        fw.write(String.format("Capabilities of %s\n.", pName));
+        Set<Object> keySet = p.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
         assert(it != null);
-        provider = Security.getProvider(providerName);
-        it = provider.keySet().iterator();
+        it = p.keySet().iterator();
         while (it.hasNext()) {
             String entry = (String)it.next();
             if (entry.startsWith("Alg.alias.")) {
@@ -90,16 +52,17 @@ public class Capabilities {
             fw.write(String.format("\t %s : %s", factoryClass, name));
             fw.write(System.lineSeparator()); //new line
         }
+
+        fw.write(String.format("ListerForAll done\n."));
         fw.close();
-        System.out.println("Written to " + fileName);
+        File resultsFile = new File(fName);
+        assert(resultsFile.exists());
+        System.out.println("Capabilities list written to " + fName);
     }
 
     public static void main(String[] args) throws Exception {
-        int i = 0;
-        while (providers[i].length() > 0) {
-            String providerName = providers[i];
-            if (providerName.compareTo("Mozilla-JSS") == 0) {
-        // Stolen from jss lister branch
+       if (false) {
+       // Stolen from jss lister branch
         // Before we initialize the CryptoManager, the JSS Provider shouldn't
         // exist.
         assert(Security.getProvider("Mozilla-JSS") == null);
@@ -114,9 +77,14 @@ public class Capabilities {
         Provider p = Security.getProviders()[0];
         assert(p.getName().equals("Mozilla-JSS"));
         assert(p instanceof org.mozilla.jss.JSSProvider);
+        }
+        try {
+            Provider ps[] = Security.getProviders();
+            for (int i = 0; i < ps.length; i++) {
+                listThisOne(ps[i]);
             }
-            listThisOne(providers[i]);
-            i++;
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }
