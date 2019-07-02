@@ -75,7 +75,7 @@ SunPKCS11: $(MAIN).class
 # List capabilities for all the providers
 #
 listAll: ListerForAll.class
-	$(JVM) -classpath ${CLASSPATH} Capabilities
+	$(JVM) -classpath ${CLASSPATH} ListerForAll
 
 clean:
 	$(RM) *.class
