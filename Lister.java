@@ -18,12 +18,15 @@ import java.util.Iterator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * List the available capablities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
  */
 public class Lister {
+    public static Logger logger = LoggerFactory.getLogger(Lister.class);
     /* Needed for the Mozilla-JSS provider */
     static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
@@ -51,6 +54,8 @@ public class Lister {
                 CryptoManager.initialize(initValues);
                 CryptoManager cm = CryptoManager.getInstance();
             } catch (Exception e) {
+                logger.warn("Exception caught CryptoManager.initialize : " +
+                e.getMessage(), e);
                 e.printStackTrace();
                 return;
             }
