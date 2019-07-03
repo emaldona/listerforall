@@ -30,12 +30,6 @@ public class Lister {
     /* Needed for the Mozilla-JSS provider */
     static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
-    String providerName;
-
-    Lister(String whichOne) {
-        providerName = whichOne;
-    }
-
     /**
      * List the the available capabilities for ciphers, key agreement, macs, messages
      * digest, signatures and other objects in the specied provider.
@@ -45,8 +39,7 @@ public class Lister {
      * @param providerName name of the provider
      * @throws Exception if the missing provider can't be installed
      */
-    public void listThem() throws Exception {
-
+    static void listThem(String providerName) throws Exception {
         Provider provider = Security.getProvider(providerName);
         if (provider == null) {
             System.out.println(providerName + " not found, will try to install it\n");
@@ -89,7 +82,11 @@ public class Lister {
             System.out.println("Usage: Lister providerName");
         } else {
             System.out.println("Listing: " + args[0]);
-            (new Lister(args[0])).listThem();
+            try {
+                listThem(args[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

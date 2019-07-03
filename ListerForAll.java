@@ -60,8 +60,7 @@ public class ListerForAll {
      * @param providerName name of the provider
      * @throws Exception if the missing provider can't be installed
      */
-    public static void listThisOne(String providerName) throws Exception {
-
+    static void listThisOne(String providerName) throws Exception {
         Provider provider = Security.getProvider(providerName);
         if (provider == null) {
             System.out.println(providerName + " not found, will try to install it\n");
@@ -77,7 +76,7 @@ public class ListerForAll {
         }
         String fileName = "Capabilities4" + providerName + ".txt";
         FileWriter fw = new FileWriter(new File(fileName));
-        fw.write(String.format("ListerForAll of %s\n.", providerName));
+        fw.write(String.format("Capabilities of %s\n.", providerName));
         Set<Object> keySet = provider.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
