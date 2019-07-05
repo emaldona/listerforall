@@ -16,7 +16,7 @@ FILE=
 
 
 CLASSES = \
-	ListerForAll.java CapabilitiesJL.java Lister.java
+	ListerForAll.java Lister.java
 
 
 MAIN = Lister
