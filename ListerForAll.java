@@ -30,7 +30,6 @@ public class ListerForAll {
     /* Needed for the Mozilla-JSS provider */
     static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
-    //final Logger logger = LoggerFactory.getLogger(ListerForAll.class);
     static final String[] providers = {
         /*
         -- If NullPointerException on provider.keySet on jdk 8 move them here
@@ -92,7 +91,7 @@ public class ListerForAll {
             String name = entry.substring(factoryClass.length()+1);
             assert(name != null);
             fw.write(String.format("\t %s : %s", factoryClass, name));
-            fw.write(System.lineSeparator()); //new line
+            fw.write(System.lineSeparator());
         }
         fw.close();
         System.out.println("Written to " + fileName);
