@@ -64,8 +64,6 @@ public class ListerForAll {
                 CryptoManager.initialize(initValues);
                 CryptoManager cm = CryptoManager.getInstance();
             } catch (Exception e) {
-                logger.warn("Exception caught CryptoManager.initialize : " +
-                e.getMessage(), e);
                 e.printStackTrace();
                 return;
             }
