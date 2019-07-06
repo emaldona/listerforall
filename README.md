@@ -5,7 +5,7 @@ Overview
 --------
 
 **Capabilities** is a a set of Java applications
-io list the capabilties for Mozilla-JSS and other installed providersto [NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS).
+io list the capabilities for Mozilla-JSS and other installed providers to [NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS).
 
 Dependencies
 ------------

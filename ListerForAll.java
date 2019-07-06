@@ -1,5 +1,5 @@
-// TODO: turn it into a module
-//
+//package org.mozilla.jss.tests;
+
 import java.security.Provider;
 import java.security.Security;
 import java.util.Iterator;
@@ -18,7 +18,8 @@ import java.util.Iterator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * List the available capablities for ciphers, key agreement, macs, message
@@ -33,9 +34,9 @@ public class ListerForAll {
 
     public static void listThisOne(Provider p) throws Exception {
         String pName = p.getName();
-        String fName = pName + "_ListerForAll.txt";
+        String fName = pName + "_Capabilities.txt";
         FileWriter fw = new FileWriter(new File(fName));
-        fw.write(String.format("ListerForAll of %s\n.", pName));
+        fw.write(String.format("Capabilities of %s\n.", pName));
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
@@ -50,27 +51,36 @@ public class ListerForAll {
             String name = entry.substring(factoryClass.length()+1);
             assert(name != null);
             fw.write(String.format("\t %s : %s", factoryClass, name));
-            fw.write(System.lineSeparator()); //new line
+            fw.write(System.lineSeparator());
         }
 
         fw.write(String.format("ListerForAll done\n."));
         fw.close();
         File resultsFile = new File(fName);
         assert(resultsFile.exists());
-        System.out.println("ListerForAll list written to " + fName);
+        System.out.println("Capabilities list written to " + fName);
     }
 
     public static void main(String[] args) throws Exception {
+
+/*
+java org.mozilla.jss.tests.SetupDBs " +
+       "<dbdir> <passwordFile>\n" + 
+       "Password file should have format:\n " +
+       "Internal\\ Key\\ Storage\\ Token=m1oZilla\n " +
+       "NSS\\ FIPS\\ 140-2\\ User\\ Private\\ " +
+       "Key=m1oZilla\n");
+*/
        if (true) {
-       // Stolen from jss lister branch
+        // Stolen from jss lister branch
         // Before we initialize the CryptoManager, the JSS Provider shouldn't
         // exist.
         assert(Security.getProvider("Mozilla-JSS") == null);
 
-        CryptoManager.initialize("");
+        CryptoManager.initialize("SetupDBs");
         CryptoManager cm = CryptoManager.getInstance();
         cm.setPasswordCallback(
-             new FilePasswordCallback(System.getProperty("user.dir").concat("/password")));
+             new FilePasswordCallback(System.getProperty("user.dir").concat("/passwords")));
 
         // Validate that the CryptoManager registers us as the
         // default/first provider.

@@ -16,7 +16,7 @@ FILE=
 
 
 CLASSES = \
-	ListerForAll.java
+	ListerForAll.java FilePasswordCallback.java SetupDBs.java
 
 
 MAIN = ListerForAll
