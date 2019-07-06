@@ -8,6 +8,10 @@ export CLASSPATH4FEDORA=.:/usr/lib/java/jss4.jar:/usr/share/java/slf4j/api.jar
 export LIBRARYPATH4DEBIAN9=/usr/lib64:/usr/lib64/jss:/usr/share/java
 export CLASSPATH4DEBIAN9=.:/usr/share/java/jss-4.3.1.jar:/usr/share/java/slf4j/api.jar
 
+# settings to use system jss in debian 10
+export LIBRARYPATH4DEBIAN10=/usr/lib64:/usr/lib64/jss:/usr/share/java
+export CLASSPATH4DEBIAN10=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j/api.jar
+
 # settings to use system jss in ubuntu 19
 export LIBRARYPATH4UBUNTU=/usr/lib64:/usr/lib64/jss:/usr/share/java
 export CLASSPATH4UBUNTU=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j/api.jar
@@ -47,7 +51,7 @@ run: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
 
 #
-# Targets to list capabities of a provider
+# Targets to list capabilities of a provider
 #
 JSS: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN) Mozilla-JSS
