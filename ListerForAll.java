@@ -27,8 +27,6 @@ import java.io.IOException;
  * It incorporates code from org.mozilla.jss.tests.PSSProvider
  */
 public class ListerForAll {
-    /* Might be needed for the Mozilla-JSS provider */
-    static final String initValues = System.getProperty("user.dir").concat("/initValues");
 
     public static void listThisOne(Provider p) throws Exception {
         String pName = p.getName();
@@ -75,10 +73,10 @@ java org.mozilla.jss.tests.SetupDBs " +
         // exist.
         assert(Security.getProvider("Mozilla-JSS") == null);
 
-        CryptoManager.initialize("SetupDBs");
+        CryptoManager.initialize("org.mozilla.jss.tests.SetupDBs");
         CryptoManager cm = CryptoManager.getInstance();
         cm.setPasswordCallback(
-             new FilePasswordCallback(System.getProperty("user.dir").concat("/passwords")));
+             new org.mozilla.jss.tests.FilePasswordCallback(System.getProperty("user.dir").concat("/passwords")));
 
         // Validate that the CryptoManager registers us as the
         // default/first provider.

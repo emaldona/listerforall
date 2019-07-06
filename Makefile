@@ -2,7 +2,7 @@
 export BUILDROOT=${HOME}/buildjss
 export LD_LIBRARY_PATH=${BUILDROOT}/jss/cmake:/usr/share/java
 
-export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:/usr/share/java/slf4j/api.jar
+export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${BUILDROOT}/jss/cmake/tests-jss4.jar:/usr/share/java/slf4j/api.jar
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
@@ -16,7 +16,7 @@ FILE=
 
 
 CLASSES = \
-	ListerForAll.java FilePasswordCallback.java SetupDBs.java
+	ListerForAll.java
 
 
 MAIN = ListerForAll
