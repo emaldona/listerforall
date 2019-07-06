@@ -68,7 +68,7 @@ public class Lister {
             String name = entry.substring(factoryClass.length()+1);
             assert(name != null);
             fw.write(String.format("\t %s : %s", factoryClass, name));
-            fw.write(System.lineSeparator()); //new line
+            fw.write(System.lineSeparator());
         }
         fw.close();
         System.out.println("Written to " + fileName);
