@@ -19,8 +19,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.mozilla.jss.util.Password;
+import org.mozilla.jss.util.PasswordCallback;
+import org.mozilla.jss.util.PasswordCallbackInfo;
+import org.mozilla.jss.util.NullPasswordCallback;
+
 /**
- * List the available capablities for ciphers, key agreement, macs, message
+ * List the available capabilities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
  *
  * This is based on example 1 from Cryptography for Java by David Hook
@@ -28,9 +37,59 @@ import java.io.IOException;
  */
 public class ListerForAll {
 
+    /* Inner class FilePasswordCallback needed by inner class SetupDB
+     */
+    public static class FilePasswordCallback implements PasswordCallback {
+
+        private Properties passwords;
+
+        public FilePasswordCallback(String filename) throws IOException {
+            passwords = new Properties();
+            FileInputStream in = new FileInputStream(filename);
+            passwords.load(in);
+        }
+
+        public Password getPasswordFirstAttempt(PasswordCallbackInfo info)
+            throws PasswordCallback.GiveUpException
+        {
+            String pw = passwords.getProperty(info.getName());
+            if ( pw == null ) {
+                throw new PasswordCallback.GiveUpException();
+            } else {
+                System.out.println("***FilePasswordCallback returns " + pw);
+                return new Password(pw.toCharArray());
+            }
+        }
+
+        public Password getPasswordAgain(PasswordCallbackInfo info)
+            throws PasswordCallback.GiveUpException
+        {
+            throw new PasswordCallback.GiveUpException();
+        }
+    }
+
+    /* Inner class SetupDB to create the NSS databases
+     */
+    public static class SetupDB {
+
+        SetupDB() {}
+
+        public void setupTheDatabase(String dbdir, String passwords) throws Exception {
+
+            CryptoManager.initialize(dbdir);
+            CryptoManager cm = CryptoManager.getInstance();
+
+            (cm.getInternalKeyStorageToken()).initPassword(
+                new NullPasswordCallback(),
+                new FilePasswordCallback(passwords))
+            ;
+        }
+    }
+
+
     public static void listThisOne(Provider p) throws Exception {
         String pName = p.getName();
-        String fName = pName + "_Capabilities.txt";
+        String fName = "CapabilitiesOf" + pName + ".txt";
         FileWriter fw = new FileWriter(new File(fName));
         fw.write(String.format("Capabilities of %s\n.", pName));
         Set<Object> keySet = p.keySet();
@@ -58,32 +117,20 @@ public class ListerForAll {
     }
 
     public static void main(String[] args) throws Exception {
-
-/*
-java org.mozilla.jss.tests.SetupDBs " +
-       "<dbdir> <passwordFile>\n" + 
-       "Password file should have format:\n " +
-       "Internal\\ Key\\ Storage\\ Token=m1oZilla\n " +
-       "NSS\\ FIPS\\ 140-2\\ User\\ Private\\ " +
-       "Key=m1oZilla\n");
-*/
-       if (true) {
-        // Stolen from jss lister branch
-        // Before we initialize the CryptoManager, the JSS Provider shouldn't
-        // exist.
-        assert(Security.getProvider("Mozilla-JSS") == null);
-
-        CryptoManager.initialize("org.mozilla.jss.tests.SetupDBs");
-        CryptoManager cm = CryptoManager.getInstance();
-        cm.setPasswordCallback(
-             new org.mozilla.jss.tests.FilePasswordCallback(System.getProperty("user.dir").concat("/passwords")));
+       /*
+       String dbArg = System.getProperty("user.dir").concat("/nssdb");
+       String pwArg = System.getProperty("user.dir").concat("/passwords");
+       SetupDB dbSetter = new SetupDB();
+       dbSetter.setupTheDatabase(dbArg, pwArg);
+       */
 
         // Validate that the CryptoManager registers us as the
         // default/first provider.
         Provider p = Security.getProviders()[0];
         assert(p.getName().equals("Mozilla-JSS"));
         assert(p instanceof org.mozilla.jss.JSSProvider);
-        }
+        System.out.println("Mozilla-JSS is registered as first provider");
+
         try {
             Provider ps[] = Security.getProviders();
             for (int i = 0; i < ps.length; i++) {
