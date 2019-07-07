@@ -5,7 +5,7 @@ Overview
 --------
 
 **Capabilities** is a a set of Java applications
-io list the capabilties for Mozilla-JSS and other installed providersto [NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS).
+io list the capabilities for Mozilla-JSS and other installed providers to [NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS).
 
 Dependencies
 ------------
@@ -30,9 +30,6 @@ To build Capabilities:
     cd capabilties
     make
     make run
-      or
-    make runJS
-        to run the app that displays a brief output
 
 TODO:
 ------------

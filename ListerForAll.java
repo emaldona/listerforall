@@ -20,7 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * List the available capablities for ciphers, key agreement, macs, message
+ * List the available capabilities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
  */
 public class ListerForAll {
