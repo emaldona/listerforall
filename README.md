@@ -30,9 +30,6 @@ To build Capabilities:
     cd capabilties
     make
     make run
-      or
-    make runJS
-        to run the app that displays a brief output
 
 TODO:
 ------------
