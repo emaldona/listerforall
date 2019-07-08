@@ -87,7 +87,7 @@ public class ListerForAll {
     }
 
 
-    public static void listThisOne(Provider p) throws Exception {
+    public static void listCapabilities(Provider p) throws Exception {
         String pName = p.getName();
         String fName = "CapabilitiesOf" + pName + ".txt";
         FileWriter fw = new FileWriter(new File(fName));
@@ -130,11 +130,15 @@ public class ListerForAll {
         assert(p.getName().equals("Mozilla-JSS"));
         assert(p instanceof org.mozilla.jss.JSSProvider);
         System.out.println("Mozilla-JSS is registered as first provider");
+        System.out.println("First provider is:");
+        System.out.println(p.getName());
+        // Is not on the ps list, odd!!
+        listCapabilities(p);
 
         try {
             Provider ps[] = Security.getProviders();
             for (int i = 0; i < ps.length; i++) {
-                listThisOne(ps[i]);
+                listCapabilities(ps[i]);
             }
         } catch (Exception e) {
             System.out.println(e);
