@@ -16,7 +16,7 @@ FILE=
 
 
 CLASSES = \
-	ListerForAll.java
+	ListerForAll.java ListerForJSS.java
 
 
 MAIN = ListerForAll
@@ -76,6 +76,13 @@ SunPKCS11: $(MAIN).class
 #
 listAll: ListerForAll.class
 	$(JVM) -classpath ${CLASSPATH} ListerForAll
+
+#
+# List capabilities for JSS using the ListerForJSS app
+#
+listForJSS: ListerForJSS.class
+	$(JVM) -classpath ${CLASSPATH} ListerForJSS
+
 
 clean:
 	$(RM) *.class
