@@ -36,10 +36,10 @@ FILE=
 
 
 CLASSES = \
-	Lister.java
+	ListerForAll.java
 
 
-MAIN = Lister
+MAIN = ListerForAll
 
 
 default: classes

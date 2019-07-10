@@ -2,7 +2,8 @@
 export BUILDROOT=${HOME}/buildjss
 export LD_LIBRARY_PATH=${BUILDROOT}/jss/cmake:/usr/share/java
 
-export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:/usr/share/java/slf4j/slf4j-api.jar
+export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${BUILDROOT}/jss/cmake/tests-jss4.jar:/usr/share/java/slf4j/api.jar
+# For Debian 10 change /usr/share/java/slf4j/api.jar to /usr/share/java/slf4j-api.jar unless you have aliases
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
@@ -16,10 +17,10 @@ FILE=
 
 
 CLASSES = \
-	ListerForAll.java Lister.java
+	ListerForAll.java ListerForJSS.java
 
 
-MAIN = Lister
+MAIN = ListerForAll
 
 
 default: classes
@@ -76,6 +77,13 @@ SunPKCS11: $(MAIN).class
 #
 listAll: ListerForAll.class
 	$(JVM) -classpath ${CLASSPATH} ListerForAll
+
+#
+# List capabilities for JSS using the ListerForJSS app
+#
+listForJSS: ListerForJSS.class
+	$(JVM) -classpath ${CLASSPATH} ListerForJSS
+
 
 clean:
 	$(RM) *.class
