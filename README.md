@@ -33,7 +33,7 @@ To build Capabilities:
 
 TODO:
 ------------
-This currently only works on Fedora
+This currently works on Fedora and Debian 10
 - Add support for other Linux destributions
 - Explore using cmake, as JSS does, as it should allow us to detect environment
   variables and thus make it easier to enable supporting other distros
