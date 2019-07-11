@@ -1,8 +1,5 @@
 //package org.mozilla.jss.tests;
 
-import java.security.Provider;
-import java.security.Security;
-import java.util.Iterator;
 import java.util.*;
 import java.security.*;
 import javax.crypto.*;
