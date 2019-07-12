@@ -27,9 +27,9 @@ Building
 To build Capabilities:
 
     git clone https://github.com/emaldona/capabilties.git
-    cd capabilties
-    make
-    make run
+    cd capabilities
+    and launch ./build.sh [with-some-options]
+    where ./build.sh -h will enumerate the options
 
 TODO:
 ------------
@@ -37,4 +37,5 @@ This currently works on Fedora and Debian 10
 - Add support for other Linux destributions
 - Explore using cmake, as JSS does, as it should allow us to detect environment
   variables and thus make it easier to enable supporting other distros
+  but for now ./build.sh works okay
 
