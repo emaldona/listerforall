@@ -30,7 +30,7 @@ lf4jpath=/usr/share/java/slf4j/api.jar
 
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   -h | --help )
-    shift; show_help; exit 2
+    shift; show_help;
     ;;
   -s | --slf4jpath )
     shift; slf4jpath=$1
