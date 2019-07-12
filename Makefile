@@ -1,9 +1,9 @@
-# Change this to where you have build JSS
-export BUILDROOT=${HOME}/buildjss
-export LD_LIBRARY_PATH=${BUILDROOT}/jss/cmake:/usr/share/java
+# Invoked by buildAndtest.sh script where the user
+# sets the BUILDROOT and SLF4JPATH for the makefile
 
-export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:/usr/share/java/slf4j/api.jar
-# For Debian 10 change /usr/share/java/slf4j/api.jar to /usr/share/java/slf4j-api.jar unless you have aliases
+export LD_LIBRARY_PATH=${BUILDROOT}/jss/cmake:/usr/share/java
+export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${SLF4JPATH}
+
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
