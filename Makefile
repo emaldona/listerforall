@@ -1,5 +1,5 @@
-# Invoked by buildAndtest.sh script where the user
-# sets the BUILDROOT and SLF4JPATH for the makefile
+# Invoked by build.sh script where the user sets
+# the BUILDROOT and SLF4JPATH for the makefile
 
 export LD_LIBRARY_PATH=${BUILDROOT}/jss/cmake:/usr/share/java
 export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${SLF4JPATH}
