@@ -31,6 +31,8 @@ import org.mozilla.jss.crypto.AlreadyInitializedException;
  * digests, signatures and other objects for the Mozilla-JSS provider.
  *
  * This is based on example 1 from Cryptography for Java by David Hook
+ * A second briefer enumeration method on main is from example given at
+ * http://www.java2s.com/Code/Java/Security/ListAllProviderAndItsAlgorithms.htm.
  * It incorporates code from org.mozilla.jss.tests.PSSProvider
  */
 public class ListerForAll {
