@@ -143,8 +143,19 @@ public class ListerForAll {
         }
 
         Provider ps[] = Security.getProviders();
+        /* List them using the verbose listing method
+         * which creates txt files for each provider listed
+         */
         for (int i = 0; i < ps.length; i++) {
             listCapabilities(ps[i]);
+        }
+        /* List them using the brief listing method
+         * which just writes to standard output
+         */
+        for (int i = 0; i < ps.length; i++) {
+            System.out.println(ps[i]);
+            for (Enumeration e = ps[i].keys(); e.hasMoreElements();)
+                System.out.println("\t" + e.nextElement());
         }
     }
 }
