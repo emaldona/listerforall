@@ -120,7 +120,7 @@ public class ListerForAll {
             String pwArg = System.getProperty("user.dir").concat("/passwords");
             SetupDB dbSetter = new SetupDB();
             dbSetter.setupTheDatabase(dbArg, pwArg);
-        } catch (org.mozilla.jss.crypto.AlreadyInitializedException aie) {
+        } catch (AlreadyInitializedException aie) {
             aie.printStackTrace();
             System.out.println("Already Initialized: keep going");
         }
