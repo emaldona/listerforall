@@ -10,7 +10,7 @@ import org.mozilla.jss.pkcs11.*;
 
 import java.security.Provider;
 import java.security.Security;
-import java.util.Iterator;
+import java.util.Enumeration;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,6 +24,7 @@ import org.mozilla.jss.util.Password;
 import org.mozilla.jss.util.PasswordCallback;
 import org.mozilla.jss.util.PasswordCallbackInfo;
 import org.mozilla.jss.util.NullPasswordCallback;
+import org.mozilla.jss.crypto.AlreadyInitializedException;
 
 /**
  * List the available capabilities for ciphers, key agreement, macs, message
@@ -113,7 +114,7 @@ public class ListerForAll {
         System.out.println("Capabilities list written to " + fName);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void addJssProvider(String[] args) throws Exception {
         try {
             String dbArg = System.getProperty("user.dir").concat("/nssdb");
             String pwArg = System.getProperty("user.dir").concat("/passwords");
@@ -131,14 +132,19 @@ public class ListerForAll {
         System.out.println("Mozilla-JSS is registered as first provider");
         System.out.println("First provider is:");
         System.out.println(p.getName());
+    }
 
+    public static void main(String[] args) throws Exception {
         try {
-            Provider ps[] = Security.getProviders();
-            for (int i = 0; i < ps.length; i++) {
-                listCapabilities(ps[i]);
-            }
+            addJssProvider(args);
         } catch (Exception e) {
             System.out.println(e);
+            return;
+        }
+
+        Provider ps[] = Security.getProviders();
+        for (int i = 0; i < ps.length; i++) {
+            listCapabilities(ps[i]);
         }
     }
 }

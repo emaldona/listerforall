@@ -17,7 +17,7 @@ FILE=
 
 
 CLASSES = \
-	ListerForAll.java ListerForJSS.java
+	ListerForAll.java
 
 
 MAIN = ListerForAll

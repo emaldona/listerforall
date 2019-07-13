@@ -20,7 +20,7 @@ show_help()
 # defaults are build and test for fedora
 buildroot=${HOME}/buildjss
 target4make=run
-lf4jpath=/usr/share/java/slf4j/api.jar
+slf4jpath=/usr/share/java/slf4j/api.jar
 
 # For Debian 10 use /usr/share/java/slf4j-api.jar
 
@@ -45,6 +45,8 @@ esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
 # Now make
+echo "BUILDROOT=${buildroot} SLF4JPATH=${slf4jpath} make -f Makefile ${target4make}"
+
 BUILDROOT=${buildroot} SLF4JPATH=${slf4jpath} make -f Makefile ${target4make}
 
 
