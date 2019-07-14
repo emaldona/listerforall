@@ -32,7 +32,7 @@ import org.mozilla.jss.crypto.AlreadyInitializedException;
  *
  * This is based on example 1 from Cryptography for Java by David Hook
  * A second briefer enumeration method on main is from example given at
- * http://www.java2s.com/Code/Java/Security/ListAllProviderAndItsAlgorithms.htm.
+ * http://www.java2s.com/Code/Java/Security/ListAllProviderAndItsAlgorithms.html
  * It incorporates code from org.mozilla.jss.tests.PSSProvider
  */
 public class ListerForAll {
