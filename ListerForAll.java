@@ -88,6 +88,7 @@ public class ListerForAll {
 
 
     public static void listCapabilities(Provider p) throws Exception {
+        System.out.println(p);
         String pName = p.getName();
         String fName = "CapabilitiesOf" + pName + ".txt";
         FileWriter fw = new FileWriter(new File(fName));
@@ -113,7 +114,7 @@ public class ListerForAll {
         fw.close();
         File resultsFile = new File(fName);
         assert(resultsFile.exists());
-        System.out.println("Capabilities list written to " + fName);
+        System.out.println("Wrote " + fName);
     }
 
     public static void addJssProvider(String[] args) throws Exception {
