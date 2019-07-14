@@ -45,7 +45,6 @@ esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
 # Now make
-echo "BUILDROOT=${buildroot} SLF4JPATH=${slf4jpath} TARGET4MAKE=${target4make} make -f Makefile ${target4make}"
 
 BUILDROOT=${buildroot} \
 SLF4JPATH=${slf4jpath} \
