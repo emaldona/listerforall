@@ -33,7 +33,7 @@ To build Capabilities:
 
 TODO:
 ------------
-This currently works on Fedora and Debian 10
+This currently works on Fedora 30 & Rawhide, Debian 10, and openSUSE Tumbleweed
 - Add support for other Linux destributions
 - Explore using cmake, as JSS does, as it should allow us to detect environment
   variables and thus make it easier to enable supporting other distros
