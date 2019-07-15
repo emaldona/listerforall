@@ -23,7 +23,10 @@ target4make=run
 slf4jpath=/usr/share/java/slf4j/api.jar
 
 # For Debian 10 use /usr/share/java/slf4j-api.jar
-# For openSUSE Tumbleweed make sure javac and java are from the same
+#
+# For openSUSE Tumbleweed we have the same patch as for Fedora but to build jss
+# you need the opensuse-tumbleweed-container branch from the emaldona jss fork
+# For the capabilites app make sure javac and java are from the same
 # jdk using sudo update-alternatives --config java|javac to prevent
 # a failure like this one:
 # Error: LinkageError occurred while loading main class ListerForAll
@@ -31,6 +34,7 @@ slf4jpath=/usr/share/java/slf4j/api.jar
 # has been compiled by a more recent version of the Java Runtime 
 # (class file version 56.0), this version of the Java Runtime only 
 # recognizes class file versions up to 55.0
+# which isn't needed when the runing the jss test suite
 
 #
 # Parse command line arguments.
