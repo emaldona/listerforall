@@ -3,7 +3,6 @@
 import java.util.*;
 import java.security.*;
 import javax.crypto.*;
-import javax.net.ssl.*;
 
 import org.mozilla.jss.*;
 import org.mozilla.jss.pkcs11.*;
