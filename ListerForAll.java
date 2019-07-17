@@ -10,14 +10,12 @@ import org.mozilla.jss.pkcs11.*;
 import java.security.Provider;
 import java.security.Security;
 import java.util.Enumeration;
+import java.util.Properties;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
 
 import org.mozilla.jss.util.Password;
 import org.mozilla.jss.util.PasswordCallback;
