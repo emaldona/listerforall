@@ -20,9 +20,9 @@ show_help()
 # defaults are build and test for fedora
 buildroot=${HOME}/buildjss
 target4make=run
-slf4jpath=/usr/share/java/slf4j/api.jar
+slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
 
-# For Debian 10 use /usr/share/java/slf4j-api.jar
+# For Debian 10 use /usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
 #
 # For openSUSE Tumbleweed we have the same patch as for Fedora but to build jss
 # you need the opensuse-tumbleweed-container branch from the emaldona jss fork

@@ -22,6 +22,8 @@ import org.mozilla.jss.util.PasswordCallback;
 import org.mozilla.jss.util.PasswordCallbackInfo;
 import org.mozilla.jss.util.NullPasswordCallback;
 import org.mozilla.jss.crypto.AlreadyInitializedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * List the available capabilities for ciphers, key agreement, macs, message
@@ -33,6 +35,8 @@ import org.mozilla.jss.crypto.AlreadyInitializedException;
  * It incorporates code from org.mozilla.jss.tests.JSSProvider
  */
 public class ListerForAll {
+
+    public static Logger logger = LoggerFactory.getLogger(ListerForAll.class);
 
     /* Inner class FilePasswordCallback needed by inner class SetupDB
      */
@@ -121,6 +125,8 @@ public class ListerForAll {
             SetupDB dbSetter = new SetupDB();
             dbSetter.setupTheDatabase(dbArg, pwArg);
         } catch (AlreadyInitializedException aie) {
+            logger.info("AlreadyInitializedException caught " +
+                        "CryptoManager.initialize(initializationValues): " + aie.getMessage(), aie);
             aie.printStackTrace();
             System.out.println("Already Initialized: keep going");
         }
@@ -138,6 +144,8 @@ public class ListerForAll {
         try {
             addJssProvider(args);
         } catch (Exception e) {
+            logger.info("Exception caught " +
+                        "in main: " + e.getMessage(), e);
             System.out.println(e);
             return;
         }
