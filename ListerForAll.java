@@ -37,6 +37,7 @@ import org.slf4j.LoggerFactory;
 public class ListerForAll {
 
     public static Logger logger = LoggerFactory.getLogger(ListerForAll.class);
+    public static String logFile = "ProvidersCapabilities.txt";
 
     /* Inner class FilePasswordCallback needed by inner class SetupDB
      */
@@ -88,11 +89,9 @@ public class ListerForAll {
     }
 
 
-    public static void listCapabilities(Provider p) throws Exception {
+    public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
         System.out.println(p);
         String pName = p.getName();
-        String fName = "CapabilitiesOf" + pName + ".txt";
-        FileWriter fw = new FileWriter(new File(fName));
         fw.write(String.format("Capabilities of %s\n.", pName));
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
@@ -110,12 +109,6 @@ public class ListerForAll {
             fw.write(String.format("\t %s : %s", factoryClass, name));
             fw.write(System.lineSeparator());
         }
-
-        fw.write(String.format("ListerForAll done\n."));
-        fw.close();
-        File resultsFile = new File(fName);
-        assert(resultsFile.exists());
-        System.out.println("Wrote " + fName);
     }
 
     public static void addJssProvider(String[] args) throws Exception {
@@ -150,13 +143,22 @@ public class ListerForAll {
             return;
         }
 
+        FileWriter fw = new FileWriter(new File(logFile));
+
         Provider ps[] = Security.getProviders();
-        /* List them using the verbose listing method
-         * which creates txt files for each provider listed
+        /* List them using the verbose listing method which
+         * adds results for each provider listed to the log file
          */
         for (int i = 0; i < ps.length; i++) {
-            listCapabilities(ps[i]);
+            listCapabilities(fw, ps[i]);
         }
+
+        fw.write(String.format("ListerForAll done\n."));
+        fw.close();
+        File resultsFile = new File(logFile);
+        assert(resultsFile.exists());
+        System.out.println("Wrote " + logFile);
+
         /* List them using the brief listing method
          * which just writes to standard output
          */
