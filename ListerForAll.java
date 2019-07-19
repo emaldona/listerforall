@@ -39,55 +39,31 @@ public class ListerForAll {
     public static Logger logger = LoggerFactory.getLogger(ListerForAll.class);
     public static String logFile = "ProvidersCapabilities.txt";
 
-    /* Inner class FilePasswordCallback needed by inner class SetupDB
+    /* Inner class to avoid having to create the NSS databases
+     * and instead use the existing one in the system
      */
-    public static class FilePasswordCallback implements PasswordCallback {
+    public static class UseSystemDB {
+        /* NSS_DB_LOCATION should probably be setup via build.sh and find a way to
+         * query the value from here, need to learn how to do that.
+         */
+        public static String NSS_DB_LOCATION = "/etc/pki/nssdb";
+        private UseSystemDB() {}
+        /* Only a static method */
 
-        private Properties passwords;
-
-        public FilePasswordCallback(String filename) throws IOException {
-            passwords = new Properties();
-            FileInputStream in = new FileInputStream(filename);
-            passwords.load(in);
-        }
-
-        public Password getPasswordFirstAttempt(PasswordCallbackInfo info)
-            throws PasswordCallback.GiveUpException
-        {
-            String pw = passwords.getProperty(info.getName());
-            if ( pw == null ) {
-                throw new PasswordCallback.GiveUpException();
-            } else {
-                System.out.println("***FilePasswordCallback returns " + pw);
-                return new Password(pw.toCharArray());
-            }
-        }
-
-        public Password getPasswordAgain(PasswordCallbackInfo info)
-            throws PasswordCallback.GiveUpException
-        {
-            throw new PasswordCallback.GiveUpException();
-        }
-    }
-
-    /* Inner class SetupDB to create the NSS databases
-     */
-    public static class SetupDB {
-
-        SetupDB() {}
-
-        public void setupTheDatabase(String dbdir, String passwords) throws Exception {
-
-            CryptoManager.initialize(dbdir);
+       /* This method is adapted from one used in the candlepin projects
+        * https://github.com/candlepin/candlepin/pull/2370/files#diff-170cc2e1af322c9796d4d8fe20e32bb0R98
+        * an approach that was suggested by Alexander Scheel
+        */
+        public static void addJSSProviderListerWay() throws Exception {
+            logger.debug("Starting call to JSSProviderLoader.addProvider()...");
+            InitializationValues ivs = new InitializationValues(NSS_DB_LOCATION);
+            ivs.noCertDB = true;
+            ivs.installJSSProvider = true;
+            ivs.initializeJavaOnly = false;
+            CryptoManager.initialize(ivs);
             CryptoManager cm = CryptoManager.getInstance();
-
-            (cm.getInternalKeyStorageToken()).initPassword(
-                new NullPasswordCallback(),
-                new FilePasswordCallback(passwords))
-            ;
         }
     }
-
 
     public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
         System.out.println(p);
@@ -112,17 +88,14 @@ public class ListerForAll {
     }
 
     public static void addJssProvider(String[] args) throws Exception {
+
         try {
-            String dbArg = System.getProperty("user.dir").concat("/nssdb");
-            String pwArg = System.getProperty("user.dir").concat("/passwords");
-            SetupDB dbSetter = new SetupDB();
-            dbSetter.setupTheDatabase(dbArg, pwArg);
-        } catch (AlreadyInitializedException aie) {
-            logger.info("AlreadyInitializedException caught " +
-                        "CryptoManager.initialize(initializationValues): " + aie.getMessage(), aie);
-            aie.printStackTrace();
-            System.out.println("Already Initialized: keep going");
+            UseSystemDB.addJSSProviderListerWay();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Alternative method failed: keep going");
         }
+
         // Validate that the CryptoManager registers us as the
         // default/first provider.
         Provider p = Security.getProviders()[0];
