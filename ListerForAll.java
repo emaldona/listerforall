@@ -88,11 +88,11 @@ public class ListerForAll {
         }
     }
 
-
+    /* List capabilites of the specified provider */
     public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
         System.out.println(p);
         String pName = p.getName();
-        fw.write(String.format("Capabilities of %s\n.", pName));
+        fw.write(String.format("Capabilities of %s\n", pName));
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
@@ -124,6 +124,7 @@ public class ListerForAll {
             aie.printStackTrace();
             System.out.println("Already Initialized: keep going");
         }
+
         // Validate that the CryptoManager registers us as the
         // default/first provider.
         Provider p = Security.getProviders()[0];
@@ -137,8 +138,8 @@ public class ListerForAll {
     public static void main(String[] args) throws Exception {
         try {
 
-          File dir = new File(System.getProperty("user.dir").concat("/nssdb"));
-          dir.mkdir();
+            File dir = new File(System.getProperty("user.dir").concat("/nssdb"));
+            dir.mkdir();
 
             addJssProvider(args);
         } catch (Exception e) {
