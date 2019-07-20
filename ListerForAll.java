@@ -69,7 +69,7 @@ public class ListerForAll {
     public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
         System.out.println(p);
         String pName = p.getName();
-        fw.write(String.format("Capabilities of %s\n.", pName));
+        fw.write(String.format("Capabilities of %s\n", pName));
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
