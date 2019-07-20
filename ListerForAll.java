@@ -38,6 +38,7 @@ public class ListerForAll {
 
     public static Logger logger = LoggerFactory.getLogger(ListerForAll.class);
     public static String logFile = "ProvidersCapabilities.txt";
+    public static String verboseFile = "ProvidersCapabilitiesVerbose.txt";
 
     /* Inner class to avoid having to create the NSS databases
      * and instead use the existing one in the system
@@ -119,26 +120,41 @@ public class ListerForAll {
         FileWriter fw = new FileWriter(new File(logFile));
 
         Provider ps[] = Security.getProviders();
+
+
+        try {
+            fw.write(String.format("ListerForAll: brief list starts\n"));
+            for (int i = 0; i < ps.length; i++) {
+                String pName = ps[i].getName();
+                fw.write(System.lineSeparator());
+                fw.write(String.format("Capabilities of %s written out\n", pName));
+                for (Enumeration e = ps[i].keys(); e.hasMoreElements();) {
+                    fw.write(String.format("\t %s", e.nextElement()));
+                    fw.write(System.lineSeparator());
+                }
+            }
+            fw.write(String.format("ListerForAll: brief list done\n"));
+            fw.close();
+            File resultsFile = new File(logFile);
+            assert(resultsFile.exists());
+            System.out.println("Capabilities list written to " + logFile);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        /* Verbose list to a separate file */
+        FileWriter vw = new FileWriter(new File(verboseFile));
         /* List them using the verbose listing method which
          * adds results for each provider listed to the log file
          */
         for (int i = 0; i < ps.length; i++) {
-            listCapabilities(fw, ps[i]);
+            listCapabilities(vw, ps[i]);
         }
 
-        fw.write(String.format("ListerForAll done\n."));
-        fw.close();
-        File resultsFile = new File(logFile);
-        assert(resultsFile.exists());
-        System.out.println("Wrote " + logFile);
-
-        /* List them using the brief listing method
-         * which just writes to standard output
-         */
-        for (int i = 0; i < ps.length; i++) {
-            System.out.println(ps[i]);
-            for (Enumeration e = ps[i].keys(); e.hasMoreElements();)
-                System.out.println("\t" + e.nextElement());
-        }
+        vw.write(String.format("Verbose done\n"));
+        vw.close();
+        File vresultsFile = new File(verboseFile);
+        assert(vresultsFile.exists());
+        System.out.println("Wrote " + verboseFile);
     }
 }
