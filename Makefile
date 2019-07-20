@@ -36,4 +36,6 @@ run: $(MAIN).class
 clean:
 	$(RM) *.class
 
+remove-nssdb:
+	$(RM) -r nssdb
 

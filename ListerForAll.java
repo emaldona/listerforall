@@ -112,6 +112,7 @@ public class ListerForAll {
     }
 
     public static void addJssProvider(String[] args) throws Exception {
+
         try {
             String dbArg = System.getProperty("user.dir").concat("/nssdb");
             String pwArg = System.getProperty("user.dir").concat("/passwords");
@@ -135,6 +136,10 @@ public class ListerForAll {
 
     public static void main(String[] args) throws Exception {
         try {
+
+          File dir = new File(System.getProperty("user.dir").concat("/nssdb"));
+          dir.mkdir();
+
             addJssProvider(args);
         } catch (Exception e) {
             logger.info("Exception caught " +
