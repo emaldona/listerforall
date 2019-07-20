@@ -40,7 +40,7 @@ public class ListerForAll {
     public static String briefFileBase = "listings/brief/Capabilities4";
     public static String verboseFileBase = "listings/verbose/Capabilities4";
 
-    /* Inner class to avoid having to use existing sytem nss database
+    /* Inner class to use existing sytem nss database
      */
     public static class UseSystemDB {
         /* Same location in the Linux distros we have tested
