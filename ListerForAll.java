@@ -130,9 +130,6 @@ public class ListerForAll {
         Provider p = Security.getProviders()[0];
         assert(p.getName().equals("Mozilla-JSS"));
         assert(p instanceof org.mozilla.jss.JSSProvider);
-        System.out.println("Mozilla-JSS is registered as first provider");
-        System.out.println("First provider is:");
-        System.out.println(p.getName());
     }
 
     public static void main(String[] args) throws Exception {
@@ -143,9 +140,8 @@ public class ListerForAll {
 
             addJssProvider(args);
         } catch (Exception e) {
-            logger.info("Exception caught " +
-                        "in main: " + e.getMessage(), e);
-            System.out.println(e);
+            logger.info("Exception caught " + "in main: " + e.getMessage(), e);
+            System.out.println(e + " - Keep going");
             return;
         }
 
@@ -159,11 +155,9 @@ public class ListerForAll {
             listCapabilities(fw, ps[i]);
         }
 
-        fw.write(String.format("ListerForAll done\n."));
         fw.close();
         File resultsFile = new File(logFile);
         assert(resultsFile.exists());
-        System.out.println("Wrote " + logFile);
 
         /* List them using the brief listing method
          * which just writes to standard output
