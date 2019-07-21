@@ -40,7 +40,7 @@ public class ListerForAll {
     public static String briefFileBase = "listings/brief/Capabilities4";
     public static String verboseFileBase = "listings/verbose/Capabilities4";
 
-    /* Inner class to use existing sytem nss database
+    /* Inner class to use existing system nss database
      */
     public static class UseSystemDB {
         /* Same location in the Linux distros we have tested
@@ -66,7 +66,7 @@ public class ListerForAll {
 
     /* List capabilites of the specified provider */
     public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
-        System.out.println(p);
+
         String pName = p.getName();
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
@@ -100,16 +100,11 @@ public class ListerForAll {
         Provider p = Security.getProviders()[0];
         assert(p.getName().equals("Mozilla-JSS"));
         assert(p instanceof org.mozilla.jss.JSSProvider);
-        System.out.println("Mozilla-JSS is registered as first provider");
-        System.out.println("First provider is:");
-        System.out.println(p.getName());
     }
 
     public static void main(String[] args) throws Exception {
         try {
             /* Create hierachy of directores for the results */
-            File dir = new File(System.getProperty("user.dir").concat("/nssdb"));
-            dir.mkdir();
 
             File dir4Listings = new File(System.getProperty("user.dir").concat("/listings"));
             dir4Listings.mkdir();
@@ -124,9 +119,8 @@ public class ListerForAll {
             addJssProvider(args);
 
         } catch (Exception e) {
-            logger.info("Exception caught " +
-                        "in main: " + e.getMessage(), e);
-            System.out.println(e);
+            logger.info("Exception caught " + "in main: " + e.getMessage(), e);
+            System.out.println("Keep going");
             return;
         }
 
@@ -144,10 +138,10 @@ public class ListerForAll {
                 fw.close();
                 File resultsFile = new File(briefFileName);
                 assert(resultsFile.exists());
-                System.out.println("Capabilities list written to " + briefFileName);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            logger.info("Exception caught " + "in main: " + e.getMessage(), e);
+            System.out.println("Keep going");
         }
 
         /* Verbose list to separate files */
@@ -162,7 +156,6 @@ public class ListerForAll {
             vw.close();
             File vresultsFile = new File(verboseFile);
             assert(vresultsFile.exists());
-            System.out.println("Wrote " + verboseFile);
         }
     }
 }
