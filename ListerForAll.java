@@ -104,7 +104,7 @@ public class ListerForAll {
 
     public static void main(String[] args) throws Exception {
         try {
-            /* Create hierachy of directores for the results */
+            /* Create hierarchy of directores for the results */
 
             File dir4Listings = new File(System.getProperty("user.dir").concat("/listings"));
             dir4Listings.mkdir();
@@ -141,7 +141,7 @@ public class ListerForAll {
             }
         } catch (Exception e) {
             logger.info("Exception caught " + "in main: " + e.getMessage(), e);
-            System.out.println("Keep going");
+            logger.info("Keep going");
         }
 
         /* Verbose list to separate files */
