@@ -139,9 +139,10 @@ public class ListerForAll {
             dir.mkdir();
 
             addJssProvider(args);
+
         } catch (Exception e) {
             logger.info("Exception caught " + "in main: " + e.getMessage(), e);
-            System.out.println(e + " - Keep going");
+            logger.info("Keep going");
             return;
         }
 
