@@ -120,7 +120,7 @@ public class ListerForAll {
 
         } catch (Exception e) {
             logger.info("Exception caught " + "in main: " + e.getMessage(), e);
-            System.out.println("Keep going");
+            logger.info("Keep going");
             return;
         }
 
