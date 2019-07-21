@@ -68,7 +68,6 @@ public class ListerForAll {
     public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
         System.out.println(p);
         String pName = p.getName();
-        fw.write(String.format("Capabilities of %s\n", pName));
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
@@ -138,17 +137,14 @@ public class ListerForAll {
                 String pName = ps[i].getName();
                 String briefFileName = briefFileBase + ps[i].getName() + ".txt";
                 FileWriter fw = new FileWriter(new File(briefFileName));
-                fw.write(System.lineSeparator());
-                fw.write(String.format("Capabilities of %s written out\n", pName));
                 for (Enumeration e = ps[i].keys(); e.hasMoreElements();) {
                     fw.write(String.format("\t %s", e.nextElement()));
                     fw.write(System.lineSeparator());
                 }
-                fw.write(String.format("ListerForAll: brief list done\n"));
                 fw.close();
                 File resultsFile = new File(briefFileName);
                 assert(resultsFile.exists());
-               System.out.println("Capabilities list written to " + briefFileName);
+                System.out.println("Capabilities list written to " + briefFileName);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -163,7 +159,6 @@ public class ListerForAll {
             String verboseFile = verboseFileBase + ps[i].getName() + ".txt";
             FileWriter vw = new FileWriter(new File(verboseFile));
             listCapabilities(vw, ps[i]);
-            vw.write(String.format("Verbose done\n"));
             vw.close();
             File vresultsFile = new File(verboseFile);
             assert(vresultsFile.exists());
