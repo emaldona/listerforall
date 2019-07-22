@@ -39,3 +39,6 @@ clean:
 remove-nssdb:
 	$(RM) -r nssdb
 
+remove-listings:
+	$(RM) -r listings
+
