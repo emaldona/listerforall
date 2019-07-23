@@ -37,62 +37,37 @@ import org.slf4j.LoggerFactory;
 public class ListerForAll {
 
     public static Logger logger = LoggerFactory.getLogger(ListerForAll.class);
-    public static String logFile = "ProvidersCapabilities.txt";
+    public static String briefFileBase = "listings/brief/Capabilities4";
+    public static String verboseFileBase = "listings/verbose/Capabilities4";
 
-    /* Inner class FilePasswordCallback needed by inner class SetupDB
+    /* Inner class to use existing system nss database
      */
-    public static class FilePasswordCallback implements PasswordCallback {
+    public static class UseSystemDB {
+        /* Same location in the Linux distros we have tested
+         */
+        public static String NSS_DB_LOCATION = "/etc/pki/nssdb";
+        private UseSystemDB() {}
+        /* Only a static method */
 
-        private Properties passwords;
-
-        public FilePasswordCallback(String filename) throws IOException {
-            passwords = new Properties();
-            FileInputStream in = new FileInputStream(filename);
-            passwords.load(in);
-        }
-
-        public Password getPasswordFirstAttempt(PasswordCallbackInfo info)
-            throws PasswordCallback.GiveUpException
-        {
-            String pw = passwords.getProperty(info.getName());
-            if ( pw == null ) {
-                throw new PasswordCallback.GiveUpException();
-            } else {
-                System.out.println("***FilePasswordCallback returns " + pw);
-                return new Password(pw.toCharArray());
-            }
-        }
-
-        public Password getPasswordAgain(PasswordCallbackInfo info)
-            throws PasswordCallback.GiveUpException
-        {
-            throw new PasswordCallback.GiveUpException();
-        }
-    }
-
-    /* Inner class SetupDB to create the NSS databases
-     */
-    public static class SetupDB {
-
-        SetupDB() {}
-
-        public void setupTheDatabase(String dbdir, String passwords) throws Exception {
-
-            CryptoManager.initialize(dbdir);
+       /* Method adapted from one used in the candlepin projects
+        * https://github.com/candlepin/candlepin/pull/2370/files#diff-170cc2e1af322c9796d4d8fe20e32bb0R98
+        * an approach that was suggested by Alexander Scheel
+        */
+        public static void addJSSProviderListerWay() throws Exception {
+            logger.debug("Starting call to JSSProviderLoader.addProvider()...");
+            InitializationValues ivs = new InitializationValues(NSS_DB_LOCATION);
+            ivs.noCertDB = true;
+            ivs.installJSSProvider = true;
+            ivs.initializeJavaOnly = false;
+            CryptoManager.initialize(ivs);
             CryptoManager cm = CryptoManager.getInstance();
-
-            (cm.getInternalKeyStorageToken()).initPassword(
-                new NullPasswordCallback(),
-                new FilePasswordCallback(passwords))
-            ;
         }
     }
 
     /* List capabilites of the specified provider */
     public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
-        System.out.println(p);
+
         String pName = p.getName();
-        fw.write(String.format("Capabilities of %s\n", pName));
         Set<Object> keySet = p.keySet();
         assert(keySet != null);
         Iterator it = keySet.iterator();
@@ -114,15 +89,10 @@ public class ListerForAll {
     public static void addJssProvider(String[] args) throws Exception {
 
         try {
-            String dbArg = System.getProperty("user.dir").concat("/nssdb");
-            String pwArg = System.getProperty("user.dir").concat("/passwords");
-            SetupDB dbSetter = new SetupDB();
-            dbSetter.setupTheDatabase(dbArg, pwArg);
-        } catch (AlreadyInitializedException aie) {
-            logger.info("AlreadyInitializedException caught " +
-                        "CryptoManager.initialize(initializationValues): " + aie.getMessage(), aie);
-            aie.printStackTrace();
-            System.out.println("Already Initialized: keep going");
+            UseSystemDB.addJSSProviderListerWay();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Alternative method failed: keep going");
         }
 
         // Validate that the CryptoManager registers us as the
@@ -134,10 +104,18 @@ public class ListerForAll {
 
     public static void main(String[] args) throws Exception {
         try {
+            /* Create hierarchy of directores for the results */
 
-            File dir = new File(System.getProperty("user.dir").concat("/nssdb"));
-            dir.mkdir();
+            File dir4Listings = new File(System.getProperty("user.dir").concat("/listings"));
+            dir4Listings.mkdir();
 
+            File dir4verboseListings = new File(System.getProperty("user.dir").concat("/listings/verbose"));
+            dir4verboseListings.mkdir();
+
+            File dir4briefListings = new File(System.getProperty("user.dir").concat("/listings/brief"));
+            dir4briefListings.mkdir();
+
+            /* Add the "Mozilla-JSS" provider */
             addJssProvider(args);
 
         } catch (Exception e) {
@@ -146,27 +124,38 @@ public class ListerForAll {
             return;
         }
 
-        FileWriter fw = new FileWriter(new File(logFile));
-
         Provider ps[] = Security.getProviders();
+
+        try {
+            for (int i = 0; i < ps.length; i++) {
+                String pName = ps[i].getName();
+                String briefFileName = briefFileBase + ps[i].getName() + ".txt";
+                FileWriter fw = new FileWriter(new File(briefFileName));
+                for (Enumeration e = ps[i].keys(); e.hasMoreElements();) {
+                    fw.write(String.format("\t %s", e.nextElement()));
+                    fw.write(System.lineSeparator());
+                }
+                fw.close();
+                File resultsFile = new File(briefFileName);
+                assert(resultsFile.exists());
+            }
+        } catch (Exception e) {
+            logger.info("Exception caught " + "in main: " + e.getMessage(), e);
+            logger.info("Keep going");
+        }
+
+        /* Verbose list to separate files */
+
         /* List them using the verbose listing method which
          * adds results for each provider listed to the log file
          */
         for (int i = 0; i < ps.length; i++) {
-            listCapabilities(fw, ps[i]);
-        }
-
-        fw.close();
-        File resultsFile = new File(logFile);
-        assert(resultsFile.exists());
-
-        /* List them using the brief listing method
-         * which just writes to standard output
-         */
-        for (int i = 0; i < ps.length; i++) {
-            System.out.println(ps[i]);
-            for (Enumeration e = ps[i].keys(); e.hasMoreElements();)
-                System.out.println("\t" + e.nextElement());
+            String verboseFile = verboseFileBase + ps[i].getName() + ".txt";
+            FileWriter vw = new FileWriter(new File(verboseFile));
+            listCapabilities(vw, ps[i]);
+            vw.close();
+            File vresultsFile = new File(verboseFile);
+            assert(vresultsFile.exists());
         }
     }
 }
