@@ -1,4 +1,4 @@
-//package org.mozilla.jss.tests;
+//package org.mozilla.jss.samples;
 
 import java.util.*;
 import java.security.*;
@@ -29,9 +29,11 @@ import org.slf4j.LoggerFactory;
  * List the available capabilities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
  *
- * This is based on example 1 from Cryptography for Java by David Hook
- * A second briefer enumeration method on main is from example given at
- * http://www.java2s.com/Code/Java/Security/ListAllProviderAndItsAlgorithms.html
+ * The listing is done via two methods:
+ * 1) A brief enumeration from example given at
+ *    http://www.java2s.com/Code/Java/Security/ListAllProviderAndItsAlgorithms.html
+ * 2) A verbose enumeration based on example 1 from Cryptography for Java by David Hook
+ *
  * It incorporates code from org.mozilla.jss.tests.JSSProvider
  */
 public class ListerForAll {
@@ -53,7 +55,7 @@ public class ListerForAll {
         * https://github.com/candlepin/candlepin/pull/2370/files#diff-170cc2e1af322c9796d4d8fe20e32bb0R98
         * an approach that was suggested by Alexander Scheel
         */
-        public static void addJSSProviderListerWay() throws Exception {
+        public static void addJSSProvider() throws Exception {
             logger.debug("Starting call to JSSProviderLoader.addProvider()...");
             InitializationValues ivs = new InitializationValues(NSS_DB_LOCATION);
             ivs.noCertDB = true;
@@ -89,7 +91,7 @@ public class ListerForAll {
     public static void addJssProvider(String[] args) throws Exception {
 
         try {
-            UseSystemDB.addJSSProviderListerWay();
+            UseSystemDB.addJSSProvider();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Alternative method failed: keep going");
@@ -102,8 +104,9 @@ public class ListerForAll {
         assert(p instanceof org.mozilla.jss.JSSProvider);
     }
 
-    public static void main(String[] args) throws Exception {
-        try {
+    private static boolean createOutputDirs() throws Exception {
+
+       try {
             /* Create hierarchy of directores for the results */
 
             File dir4Listings = new File(System.getProperty("user.dir").concat("/listings"));
@@ -115,17 +118,19 @@ public class ListerForAll {
             File dir4briefListings = new File(System.getProperty("user.dir").concat("/listings/brief"));
             dir4briefListings.mkdir();
 
-            /* Add the "Mozilla-JSS" provider */
-            addJssProvider(args);
+            return true;
 
         } catch (Exception e) {
-            logger.info("Exception caught " + "in main: " + e.getMessage(), e);
+            logger.info("Exception caught in createOutputDirs: " + e.getMessage(), e);
             logger.info("Keep going");
-            return;
+            return false;
         }
+    }
 
-        Provider ps[] = Security.getProviders();
-
+    /* List providers capabilities using the brief listing method which adds
+     * results for each provider listed to the listings/brief directory
+     */
+    public static void listBrief(Provider[] ps) throws Exception {
         try {
             for (int i = 0; i < ps.length; i++) {
                 String pName = ps[i].getName();
@@ -140,22 +145,39 @@ public class ListerForAll {
                 assert(resultsFile.exists());
             }
         } catch (Exception e) {
-            logger.info("Exception caught " + "in main: " + e.getMessage(), e);
+            logger.info("Exception caught in listBrief: " + e.getMessage(), e);
             logger.info("Keep going");
         }
+    }
 
-        /* Verbose list to separate files */
+    /* List prsoviders capabilitie using the verbose listing method which adds
+     * results for each provider listed to the listings/verbose directory
+     */
+    public static void listVerbose(Provider[] ps) throws Exception {
+        try {
+            for (int i = 0; i < ps.length; i++) {
+                String verboseFile = verboseFileBase + ps[i].getName() + ".txt";
+                FileWriter vw = new FileWriter(new File(verboseFile));
+                listCapabilities(vw, ps[i]);
+                vw.close();
+                File vresultsFile = new File(verboseFile);
+                assert(vresultsFile.exists());
+            }
+        } catch (Exception e) {
+            logger.info("Exception caught in listVerbose: " + e.getMessage(), e);
+            logger.info("Keep going");
+        }
+    }
 
-        /* List them using the verbose listing method which
-         * adds results for each provider listed to the log file
-         */
-        for (int i = 0; i < ps.length; i++) {
-            String verboseFile = verboseFileBase + ps[i].getName() + ".txt";
-            FileWriter vw = new FileWriter(new File(verboseFile));
-            listCapabilities(vw, ps[i]);
-            vw.close();
-            File vresultsFile = new File(verboseFile);
-            assert(vresultsFile.exists());
+    public static void main(String[] args) {
+        try {
+            if (!createOutputDirs()) return;
+            addJssProvider(args);
+            Provider ps[] = Security.getProviders();
+            listBrief(ps);
+            listVerbose(ps);
+        } catch (Exception e) {
+            logger.info("Exception caught in main: " + e.getMessage(), e);
         }
     }
 }
