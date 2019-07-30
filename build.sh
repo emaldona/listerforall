@@ -8,8 +8,6 @@
 # This script builds ListForAll with make.
 #
 
-set -e
-
 cwd=$(cd $(dirname $0); pwd -P)
 
 # Usage info
@@ -17,10 +15,15 @@ show_help()
 {
     cat "$cwd/help.txt"
 }
+
+slf4jpath4opensuse=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/slf4j-jdk14.jar
+slf4jpath4debian=/usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
+slf4jpath4fedora=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
+
 # defaults are build and test for fedora
 buildroot=${HOME}/buildjss
 target4make=run
-slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
+slf4jpath=${slf4jpath4fedora}
 
 # For Debian 10 use /usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
 #
@@ -56,6 +59,24 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
     ;;
 esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
+
+isFedora=`grep fedora /usr/lib/os-release`
+isDebian=`grep debian /usr/lib/os-release`
+isOpenSUSE=`grep opensuse /usr/lib/os-release`
+
+printf "Fedora   - %s\n" "${isFedora}"
+printf "Debian   - %s\n" "${isDebian}"
+printf "openSUSE - %s\n" "${isOpenSUSE}"
+
+if [[ "${isOpenSUSE}" != '' ]]; then
+   echo "Building for openSUSE"
+   slf4jpath=${slf4jpath4opensuse}
+elif [[ "${isDebian}" != '' ]]; then
+   echo "Building for debian"
+   slf4jpath=${slf4jpath4debian}
+else
+   echo "Building for fedora, using defaults"
+fi
 
 # Now make
 

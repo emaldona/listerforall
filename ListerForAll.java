@@ -66,7 +66,7 @@ public class ListerForAll {
         }
     }
 
-    /* List capabilites of the specified provider */
+    /* List capabilities of the specified provider */
     public static void listCapabilities(FileWriter fw, Provider p) throws Exception {
 
         String pName = p.getName();
@@ -104,6 +104,7 @@ public class ListerForAll {
         assert(p instanceof org.mozilla.jss.JSSProvider);
     }
 
+    /* Creates output lists hierarchy  */
     private static boolean createOutputDirs() throws Exception {
 
        try {
@@ -150,7 +151,7 @@ public class ListerForAll {
         }
     }
 
-    /* List prsoviders capabilitie using the verbose listing method which adds
+    /* List providers capabilities using the verbose listing method which adds
      * results for each provider listed to the listings/verbose directory
      */
     public static void listVerbose(Provider[] ps) throws Exception {
