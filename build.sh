@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
-#
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-################################################################################
-#
-# This script builds ListForAll with make.
-#
 
-set -e
+# BEGIN COPYRIGHT BLOCK
+# (C) 2018 Red Hat, Inc.
+# All rights reserved.
+# END COPYRIGHT BLOCK
 
 cwd=$(cd $(dirname $0); pwd -P)
 
@@ -17,10 +12,9 @@ show_help()
 {
     cat "$cwd/help.txt"
 }
-# defaults are build and test for fedora
+
 buildroot=${HOME}/buildjss
 target4make=run
-slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
 
 # For Debian 10 use /usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
 #
@@ -56,6 +50,22 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
     ;;
 esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
+
+isFedora=`grep fedora /usr/lib/os-release`
+isDebian=`grep debian /usr/lib/os-release`
+isOpenSUSE=`grep opensuse /usr/lib/os-release`
+
+
+if [[ "${isOpenSUSE}" != '' ]]; then
+   echo "openSUSE build"
+   slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/slf4j-jdk14.jar
+elif [[ "${isDebian}" != '' ]]; then
+   echo "Debian build"
+   slf4jpath=/usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
+else
+   echo "Fedora build"
+   slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
+fi
 
 # Now make
 
