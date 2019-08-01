@@ -40,20 +40,21 @@ adjustments are needed.
 
 =================================================
 # For openSUSE builds against system installed jss
-# Make this change to Makefile:
-#----------------------------------------------
--export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${SLF4JPATH}
-+export CLASSPATH=.:${BUILDROOT}/jss/build/jss4.jar:${SLF4JPATH}
+# In Makefile change
+export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${SLF4JPATH}
+ to
+export CLASSPATH=.:${BUILDROOT}/jss/build/jss4.jar:${SLF4JPATH}
 
-and for the systemjsMakefile do these:
+# and in systemjssMakefile change:
 
--export LD_LIBRARY_PATH=${LIBRARYPATH4FEDORA}
--export CLASSPATH=${CLASSPATH4FEDORA}
-+export LD_LIBRARY_PATH=${LIBRARYPATH4OPENSUSE}
-+export CLASSPATH=${CLASSPATH4OPENSUSE}
+export LD_LIBRARY_PATH=${LIBRARYPATH4FEDORA}
+export CLASSPATH=${CLASSPATH4FEDORA}
+to
+export LD_LIBRARY_PATH=${LIBRARYPATH4OPENSUSE}
+export CLASSPATH=${CLASSPATH4OPENSUSE}
 
 per the comments given there, strictly local changes.
------------------------------------------------------
+
 TODO:
 #################################################
 - Explore using cmake, as JSS does, as it should allow us to detect environment
