@@ -28,7 +28,7 @@ To build Capabilities:
 
     git clone https://github.com/emaldona/capabilties.git
     cd capabilities
-    and launch ./build.sh [with-some-options]
+    and launch build.sh [with-some-options]
     where ./build.sh -h will enumerate the options
 
 LIMITATIONS:
@@ -38,7 +38,7 @@ OpenSUSE builds against the built JSS aren't working,
 only builds against the system jss work and some manual adjustemnst
 adjustments are needed.
 
-To view workarounds for openSUSE see: [`./adustments4upensuse.md`](./adustments4upensuse.md).
+To view workarounds for openSUSE see: [`docs/adustments4upensuse.md`](docs/adustments4upensuse.md).
 
 TODO:
 #################################################
