@@ -34,30 +34,26 @@ To build Capabilities:
 LIMITATIONS:
 ========================================
 This currently works on Fedora 30 and Debian 10
-OpenSUSE builds againts the built JSS aren't working,
-only builds againt the system jss work and some manual adjustemnst
+OpenSUSE builds against the built JSS aren't working,
+only builds against the system jss work and some manual adjustemnst
 adjustments are needed.
 
 =================================================
-# For openSUSE builds against sytem installed jss
-#______________________________________________
-# If in the master branch make this change to Makefile:
+# For openSUSE builds against system installed jss
+# Make this change to Makefile:
 #----------------------------------------------
-In the Makefile
 -export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${SLF4JPATH}
 +export CLASSPATH=.:${BUILDROOT}/jss/build/jss4.jar:${SLF4JPATH}
-In the systemjsMakefile do these cahnges
+
+and for the systemjsMakefile do these:
+
 -export LD_LIBRARY_PATH=${LIBRARYPATH4FEDORA}
 -export CLASSPATH=${CLASSPATH4FEDORA}
 +export LD_LIBRARY_PATH=${LIBRARYPATH4OPENSUSE}
 +export CLASSPATH=${CLASSPATH4OPENSUSE}
-per the comments there. Strictly local changes.
-#______________________________________________
-# If in the use-ant branch make this changes to build.xml and jssBuild.xml
-#----------------------------------------------
--        <fileset dir="/usr/lib64/jss" includes="*.jar"/>
-+        <fileset dir="/usr/lib64/java" includes="*.jar"/>
-----------------------------------------------------
+
+per the comments given there, strictly local changes.
+-----------------------------------------------------
 TODO:
 #################################################
 - Explore using cmake, as JSS does, as it should allow us to detect environment
