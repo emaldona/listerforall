@@ -38,7 +38,7 @@ OpenSUSE builds against the built JSS aren't working,
 only builds against the system jss work and some manual adjustemnst
 adjustments are needed.
 
-To view workarounds for openSUSE see: [`docs/adustments4upensuse.md`](docs/adustments4upensuse.md).
+To view workarounds for openSUSE see: [`docs/adjustments4upensuse.md`](docs/adjustments4upensuse.md).
 
 TODO:
 #################################################
