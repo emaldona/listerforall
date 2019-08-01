@@ -2,13 +2,13 @@ Capabilities
 ========================================
 
 Overview
---------
+========================================
 
 **Capabilities** is a a set of Java applications
 io list the capabilities for Mozilla-JSS and other installed providers to [NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS).
 
 Dependencies
-------------
+========================================
 
 This project has the following dependencies:
 
@@ -23,7 +23,7 @@ To install these dependencies on Fedora, execute the following:
                      junit
 
 Building
---------
+========================================
 To build Capabilities:
 
     git clone https://github.com/emaldona/capabilties.git
@@ -32,8 +32,8 @@ To build Capabilities:
     where ./build.sh -h will enumerate the options
 
 TODO:
-------------
-This currently works on Fedora 30 & Rawhide, Debian 10, and openSUSE Tumbleweed
+========================================
+This currently works on Fedora 30 and Debian 10
 - Add support for other Linux destributions
 - Explore using cmake, as JSS does, as it should allow us to detect environment
   variables and thus make it easier to enable supporting other distros
