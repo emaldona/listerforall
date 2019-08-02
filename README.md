@@ -4,8 +4,8 @@ Capabilities
 Overview
 ========================================
 
-**Capabilities** is a a set of Java applications
-io list the capabilities for Mozilla-JSS and other installed providers to [NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS).
+**Capabilities** has a Java application to list the capabilities
+of the "Mozilla-JSS" provider and other installed providers
 
 Dependencies
 ========================================
@@ -26,7 +26,7 @@ Building
 ========================================
 To build Capabilities:
 
-    git clone https://github.com/emaldona/capabilties.git
+    git clone https://github.com/emaldona/capabilities.git
     cd capabilities
     and launch build.sh [with-some-options]
     where ./build.sh -h will enumerate the options
@@ -34,11 +34,12 @@ To build Capabilities:
 LIMITATIONS:
 ========================================
 This currently works on Fedora 30 and Debian 10
-OpenSUSE builds against the built JSS aren't working,
-only builds against the system jss work and some manual adjustemnst
+openSUSE builds against the built JSS aren't working,
+only builds against the system jss work and some manual
 adjustments are needed.
 
-To view workarounds for openSUSE see workarounds4openSUSE.txt in this directory.
+To view workarounds for openSUSE see workarounds4openSUSE.txt
+in this directory.
 
 TODO:
 #################################################
