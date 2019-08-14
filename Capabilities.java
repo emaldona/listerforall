@@ -3,10 +3,6 @@
 import java.util.*;
 import java.security.*;
 import javax.crypto.*;
-
-import org.mozilla.jss.*;
-import org.mozilla.jss.pkcs11.*;
-
 import java.security.Provider;
 import java.security.Security;
 import java.util.Enumeration;
@@ -17,6 +13,9 @@ import java.io.FileWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.mozilla.jss.CryptoManager;
+import org.mozilla.jss.InitializationValues;
+import org.mozilla.jss.JSSProvider;
 import org.mozilla.jss.util.Password;
 import org.mozilla.jss.util.PasswordCallback;
 import org.mozilla.jss.util.PasswordCallbackInfo;
