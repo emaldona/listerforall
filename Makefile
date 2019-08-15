@@ -1,5 +1,5 @@
 # Invoked by build.sh script where the user can set
-# the BUILDROOT and SLF4JPATH for the makefile and the taget
+# the BUILDROOT and SLF4JPATH for the makefile and the target
 
 export LD_LIBRARY_PATH=${BUILDROOT}/jss/cmake:/usr/share/java
 export CLASSPATH=.:${BUILDROOT}/jss/cmake/jss4.jar:${SLF4JPATH}
@@ -17,6 +17,7 @@ FILE=
 
 
 CLASSES = \
+	Capabilities.java \
 	ListerForAll.java
 
 
