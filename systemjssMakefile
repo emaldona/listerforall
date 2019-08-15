@@ -1,4 +1,6 @@
-# Makefile that uses the system jss
+# Makefile that uses the system installed jss
+# Invoked by systemjssBuild.sh script where the user can set
+# the BUILDROOT and SLF4JPATH for the makefile and the target
 
 # settings to use system jss in fedora 30
 export LIBRARYPATH4FEDORA=/usr/lib64:/usr/lib64/jss:/usr/share/java
