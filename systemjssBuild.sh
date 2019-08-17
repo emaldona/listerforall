@@ -33,6 +33,7 @@ if [[ "$1" == '--' ]]; then shift; fi
 
 isFedora=`grep fedora /etc/os-release`
 isDebian=`grep debian /etc/os-release`
+isUbuntu=`grep ubuntu /etc/os-release`
 isOpenSUSE=`grep opensuse /etc/os-release`
 
 
@@ -41,10 +42,14 @@ if [[ "${isOpenSUSE}" != '' ]]; then
    slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/slf4j-jdk14.jar
 elif [[ "${isDebian}" != '' ]]; then
    echo "Debian build"
+elif [[ "${isUbuntu}" != '' ]]; then
+   echo "Ubuntu build"
    slf4jpath=/usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
-else
+elif [[ "${isFedora}" != '' ]]; then
    echo "Fedora build"
    slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
+else
+   echo "Unsupported distribution"
 fi
 
 # Now make
