@@ -31,6 +31,11 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
 esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
+if [[ ! -f /etc/os-release ]] ; then
+    echo 'File "\/etc\/os-release" is not there, aborting.'
+    exit
+fi
+
 isFedora=`grep fedora /etc/os-release`
 isDebian=`grep debian /etc/os-release`
 isUbuntu=`grep ubuntu /etc/os-release`
