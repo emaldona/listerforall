@@ -32,7 +32,7 @@ esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
 if [[ ! -f /etc/os-release ]] ; then
-    echo 'File "\/etc\/os-release" is not there, aborting.'
+    echo 'File "/etc/os-release" is not there, aborting.'
     exit
 fi
 
