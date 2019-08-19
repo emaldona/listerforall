@@ -3,28 +3,30 @@
 # the BUILDROOT and SLF4JPATH for the makefile and the target
 
 # settings to use system jss in fedora 30
-export LIBRARYPATH4FEDORA=/usr/lib64:/usr/lib64/jss:/usr/share/java
-export CLASSPATH4FEDORA=.:/usr/lib/java/jss4.jar:/usr/share/java/slf4j/api.jar
+librarypath4fedora=/usr/lib64:/usr/lib64/jss:/usr/share/java
+classpath4fedora=.:/usr/lib/java/jss4.jar:/usr/share/java/slf4j/api.jar
 
 # settings to use system jss in debian 9
-export LIBRARYPATH4DEBIAN9=/usr/lib64:/usr/lib64/jss:/usr/share/java
-export CLASSPATH4DEBIAN9=.:/usr/share/java/jss-4.3.1.jar:/usr/share/java/slf4j/api.jar
+librarypath4debian9=/usr/lib64:/usr/lib64/jss:/usr/share/java
+classpath4debian9=.:/usr/share/java/jss-4.3.1.jar:/usr/share/java/slf4j/api.jar
 
 # settings to use system jss in debian 10
-export LIBRARYPATH4DEBIAN10=/usr/lib64:/usr/lib64/jss:/usr/share/java
-export CLASSPATH4DEBIAN10=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j-api.jar
+librarypath4debian10=/usr/lib64:/usr/lib64/jss:/usr/share/java
+classpath4debian10=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j-api.jar
 
 # settings to use system jss in ubuntu 19
-export LIBRARYPATH4UBUNTU=/usr/lib64:/usr/lib64/jss:/usr/share/java
-export CLASSPATH4UBUNTU=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j/api.jar
+librarypath4ubuntu=/usr/lib64:/usr/lib64/jss:/usr/share/java
+classpath4ubuntu=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j/api.jar
 
 # settings to use system jss in openSUSE
-export LIBRARYPATH4OPENSUSE=/usr/lib64:/usr/share/java
-export CLASSPATH4OPENSUSE=.:/usr/lib64/java/jss4-4.5.0.jar:/usr/share/java/slf4j/api.jar
+librarypath4opensuse=/usr/lib64:/usr/share/java
+classpath4opensuse=.:/usr/lib64/java/jss4-4.5.0.jar:/usr/share/java/slf4j/api.jar
 
-# switch to the one you wish to use
-export LD_LIBRARY_PATH=${LIBRARYPATH4FEDORA}
-export CLASSPATH=${CLASSPATH4FEDORA}
+#
+# change this two to the ones you wish to use
+#
+export LD_LIBRARY_PATH=${librarypath4fedora}
+export CLASSPATH=${classpath4fedora}
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
