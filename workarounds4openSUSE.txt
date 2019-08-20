@@ -1,7 +1,4 @@
-OpenSUSE builds against the built JSS aren't working.
-Only builds against the system jss work and some manual
-adjustments are needed.
- 
+Builds against the system jss need manual adjustments
 As stated in systemjssMakefile change
  
  export LD_LIBRARY_PATH=${librarypath4fedora}
