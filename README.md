@@ -33,13 +33,10 @@ To build Capabilities:
 
 LIMITATIONS:
 ========================================
-This currently works on Fedora 30 and Debian 10
-openSUSE builds against the built JSS aren't working,
-only builds against the system jss work and some manual
-adjustments are needed.
-
-To view workarounds for openSUSE see workarounds4openSUSE.txt
-in this directory.
+This currently works on Fedora 30 and Debian 10 and also on
+openSUSE Tumbleweed where some manual adjustments are needed
+when building against system-installed JSS. For the needed changes
+see the adjustements4openSUSE.txt file in this directory.
 
 TODO:
 #################################################
