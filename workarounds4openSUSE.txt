@@ -9,13 +9,13 @@ In Makefile change
  
 and as stated in systemjssMakefile change
  
- export LD_LIBRARY_PATH=${LIBRARYPATH4FEDORA}
- export CLASSPATH=${CLASSPATH4FEDORA}
+ export LD_LIBRARY_PATH=${librarypath4fedora}
+ export CLASSPATH=${classpath4fedora}
   
  to
 
- export LD_LIBRARY_PATH=${LIBRARYPATH4OPENSUSE}
- export CLASSPATH=${CLASSPATH4OPENSUSE}
+ export LD_LIBRARY_PATH=${librarypath4opensuse}
+ export CLASSPATH=${classpath4opensuse}
 
  These are meant to be strictly local changes.
 
