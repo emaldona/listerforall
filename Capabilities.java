@@ -90,6 +90,22 @@ public class Capabilities {
         }
     }
 
+    /* Determine whether Mozilla-JSS provider was registered */
+    public boolean jssIsRegistered(Provider[] ps) throws Exception {
+        Provider jssProvider = null;
+        for (int i = 0; i < ps.length; i++) {
+            Provider p = ps[i];
+            if (p.getName().equals("Mozilla-JSS")) {
+                jssProvider = p;
+                break;
+            }
+        }
+        assert(jssProvider != null);
+        assert(jssProvider.getName().equals("Mozilla-JSS"));
+        assert(jssProvider instanceof org.mozilla.jss.JSSProvider);
+        return (jssProvider != null);
+    }
+
     public void addJssProvider() throws Exception {
 
         try {
@@ -99,11 +115,8 @@ public class Capabilities {
             System.out.println("Alternative method failed: keep going");
         }
 
-        // Validate that the CryptoManager registers us as the
-        // default/first provider.
-        Provider p = Security.getProviders()[0];
-        assert(p.getName().equals("Mozilla-JSS"));
-        assert(p instanceof org.mozilla.jss.JSSProvider);
+        // Validate that CryptoManager registers jss as a provider.
+        assert(jssIsRegistered(Security.getProviders()) == true);
     }
 
     public boolean createOutputDirs() throws Exception {
