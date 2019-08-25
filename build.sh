@@ -52,8 +52,8 @@ elif [[ "${isFedora}" != '' ]]; then
     echo "Fedora build"
     slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
 else
-   echo "Unsupported distribution"
-   exit
+    echo "Unsupported distribution"
+    exit
 fi
 
 # Now make
