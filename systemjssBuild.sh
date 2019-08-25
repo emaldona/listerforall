@@ -6,6 +6,7 @@ cwd=$(cd $(dirname $0); pwd -P)
 show_help()
 {
     cat "$cwd/help.txt"
+    exit
 }
 
 buildroot=${HOME}/buildjss
@@ -42,16 +43,17 @@ isOpenSUSE=`grep opensuse /etc/os-release`
 
 
 if [[ "${isOpenSUSE}" != '' ]]; then
-   echo "openSUSE build"
-   slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/slf4j-jdk14.jar
+    echo "openSUSE build"
+    slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/slf4j-jdk14.jar
 elif [[ "${isDebian}" != '' ]]; then
-   echo "Debian build"
-   slf4jpath=/usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
+    echo "Debian build"
+    slf4jpath=/usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
 elif [[ "${isFedora}" != '' ]]; then
-   echo "Fedora build"
-   slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
+    echo "Fedora build"
+    slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
 else
-   echo "Unsupported distribution"
+    echo "Unsupported distribution"
+    exit
 fi
 
 # Now make
