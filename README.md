@@ -33,10 +33,21 @@ To build Capabilities:
 
 LIMITATIONS:
 ========================================
+Using cmake:
+This currently does not work.
+
+Using make:
 This currently works on Fedora 30 and Debian 10 and also on
 openSUSE Tumbleweed where some manual adjustments are needed
 when building against system-installed JSS. For the needed changes
 see the adjustements4openSUSE.txt file in this directory.
+
+Using ant:
+Use build4ant.sh which works on Fedora 30 and Debian 10 and
+openSUSE Tumbleweed.
+
+The 'git branch -a' command will show you the branches
+named according to the build method they support.
 
 TODO:
 #################################################
