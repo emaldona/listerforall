@@ -34,7 +34,7 @@ To build Capabilities:
 LIMITATIONS:
 ========================================
 Using cmake:
-This currently work and been tested on Fedora.
+This currently works and has been tested on Fedora.
 
 Using make:
 This currently works on Fedora 30 and Debian 10 and also on
@@ -50,4 +50,5 @@ TODO:
 - Explore using cmake, as JSS does, as it should allow us to detect environment
   variables and thus make it easier to enable supporting other distros
   but for now ./build.sh and systemBuild.sh work okay
-- Add support for other Linux distributions as requested
+- Test cmake build method on debian and openSUSE
+- Add support for other Linux distributions as they are requested
