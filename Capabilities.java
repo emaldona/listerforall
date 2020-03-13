@@ -165,7 +165,7 @@ public class Capabilities {
         }
     }
 
-    /* List prsoviders capabilitie using the verbose listing method which adds
+    /* List providers capabilities using the verbose listing method which adds
      * results for each provider listed to the listings/verbose directory
      */
     public void listVerbose(Provider[] ps) throws Exception {
