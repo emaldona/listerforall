@@ -34,7 +34,7 @@ To build Capabilities:
 LIMITATIONS:
 ========================================
 Using cmake:
-This currently works and has been tested on Fedora.
+Currently doesn't work.
 
 Using make:
 This currently works on Fedora 30 and Debian 10 and also on
@@ -42,13 +42,9 @@ openSUSE Tumbleweed where some manual adjustments are needed
 when building against system-installed JSS. For the needed changes
 see the adjustements4openSUSE.txt file in this directory.
 
-The 'git branch -a' command will show you the branches
-named according to the build method they support.
-
 TODO:
 #################################################
 - Explore using cmake, as JSS does, as it should allow us to detect environment
   variables and thus make it easier to enable supporting other distros
   but for now ./build.sh and systemBuild.sh work okay
-- Test cmake build method on debian and openSUSE
 - Add support for other Linux distributions as they are requested
