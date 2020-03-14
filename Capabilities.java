@@ -148,15 +148,14 @@ public class Capabilities {
     public void listBrief(Provider[] ps) throws Exception {
         try {
             for (int i = 0; i < ps.length; i++) {
-                String pName = ps[i].getName();
-                String briefFileName = briefFileBase + ps[i].getName() + ".txt";
-                FileWriter fw = new FileWriter(new File(briefFileName));
+                String fileName = briefFileBase + ps[i].getName() + ".txt";
+                FileWriter fw = new FileWriter(new File(fileName));
                 for (Enumeration e = ps[i].keys(); e.hasMoreElements();) {
                     fw.write(String.format("\t %s", e.nextElement()));
                     fw.write(System.lineSeparator());
                 }
                 fw.close();
-                File resultsFile = new File(briefFileName);
+                File resultsFile = new File(fileName);
                 assert(resultsFile.exists());
             }
         } catch (Exception e) {
@@ -171,12 +170,12 @@ public class Capabilities {
     public void listVerbose(Provider[] ps) throws Exception {
         try {
             for (int i = 0; i < ps.length; i++) {
-                String verboseFile = verboseFileBase + ps[i].getName() + ".txt";
-                FileWriter vw = new FileWriter(new File(verboseFile));
-                listCapabilities(vw, ps[i]);
-                vw.close();
-                File vresultsFile = new File(verboseFile);
-                assert(vresultsFile.exists());
+                String fileName = verboseFileBase + ps[i].getName() + ".txt";
+                FileWriter fw = new FileWriter(new File(fileName));
+                listCapabilities(fw, ps[i]);
+                fw.close();
+                File resultsFile = new File(fileName);
+                assert(resultsFile.exists());
             }
         } catch (Exception e) {
             logger.info("Exception caught in listVerbose: " + e.getMessage(), e);

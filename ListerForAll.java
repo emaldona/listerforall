@@ -8,6 +8,12 @@ import org.slf4j.Logger;
  * List the available capabilities for ciphers, key agreement, macs, message
  * digests, signatures and other objects for the Mozilla-JSS provider.
  *
+ * The listing is done via two methods:
+ * 1) A brief enumeration from example given at
+ *    http://www.java2s.com/Code/Java/Security/ListAllProviderAndItsAlgorithms.html
+ * 2) A verbose enumeration based on example 1 from Cryptography for Java by David Hook
+ *
+ * Initialization code is like the one in org.mozilla.jss.tests.HmacTest
  */
 public class ListerForAll {
 
