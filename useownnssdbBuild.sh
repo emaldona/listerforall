@@ -67,5 +67,5 @@ fi
 BUILDROOT=${buildroot} \
 SLF4JPATH=${slf4jpath} \
 TARGET4MAKE=${target4make} \
-make -f Makefile ${removeNssdb} ${target4make}
+make -f useownnssdbMakefile ${removeNssdb} ${target4make}
 
