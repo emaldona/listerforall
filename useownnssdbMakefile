@@ -39,7 +39,7 @@ clean:
 	$(RM) *.class
 
 remove-nssdb:
-	$(RM) -r nssdb
+	$(RM) -r ${BUILDROOT}/jss/build/RESULTS/nssdb
 
 remove-listings:
 	$(RM) -r listings

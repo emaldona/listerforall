@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * digests, signatures and other objects for the Mozilla-JSS provider.
  *
  * The listing is done via two methods:
- * 1) A brief enumeration from example given at
+ * 1) A brief enumeration from example given at page that can no longer be found
  *    http://www.java2s.com/Code/Java/Security/ListAllProviderAndItsAlgorithms.html
  * 2) A verbose enumeration based on example 1 from Cryptography for Java by David Hook
  *
