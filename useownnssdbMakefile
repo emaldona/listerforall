@@ -1,4 +1,4 @@
-# Invoked by usenssdbBuild.sh script where the user can set
+# Invoked by useownnssdbBuild.sh script where the user can set
 # the BUILDROOT and SLF4JPATH for the makefile and the target
 # Supports using the nssdb from the latest build
 
