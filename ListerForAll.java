@@ -55,7 +55,7 @@ public class ListerForAll {
      */
     static class Capabilities {
 
-        public static Logger logger = LoggerFactory.getLogger(CapabilitiesList.class);
+        public static Logger logger = LoggerFactory.getLogger(ListerForAll.class);
         public static String briefFileBase = "listings/brief/Capabilities4";
         public static String verboseFileBase = "listings/verbose/Capabilities4";
 
