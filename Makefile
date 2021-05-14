@@ -17,7 +17,6 @@ FILE=
 
 
 CLASSES = \
-	Capabilities.java \
 	ListerForAll.java
 
 
