@@ -32,7 +32,7 @@ export CLASSPATH=${classpath4fedora}
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
-JVM= java 
+JVM= java
 FILE=
 
 .SUFFIXES: .java .class
@@ -47,6 +47,7 @@ CLASSES = \
 
 MAIN = ListerForAll
 
+
 default: classes
 
 classes: $(CLASSES:.java=.class)
@@ -57,6 +58,7 @@ classes: $(CLASSES:.java=.class)
 run: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN)
 
+#
 # For the next ones you must invoke make directly
 # as from the build shell scripts they won't work
 #
