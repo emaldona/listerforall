@@ -57,6 +57,9 @@ classes: $(CLASSES:.java=.class)
 run: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN)
 
+# For the next ones you must invoke make directly
+# as from the build shell scripts they won't work
+#
 clean:
 	$(RM) *.class
 

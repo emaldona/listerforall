@@ -37,9 +37,10 @@ Using cmake:
 Currently doesn't work.
 
 Using make:
-This currently works on Fedora 30 and Debian 10 if you install cmake
-from the testing repo as the one installed is tooby default si old. It
-also works on openSUSE Tumbleweed where some manual adjustments are needed
+This currently works on Fedora and Debian 10. You need to install cmake
+from the testing repo as the one installed is by default is an older version
+that the one required. Other packages may be needed from testing as well.
+It also works on openSUSE Tumbleweed where some manual adjustments are needed
 when building against system-installed JSS. For the needed changes
 see the adjustements4openSUSE.txt file in this directory.
 

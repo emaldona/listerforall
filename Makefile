@@ -7,7 +7,7 @@ export CLASSPATH=.:${BUILDROOT}/jss/build/jss4.jar:${SLF4JPATH}
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
 JC = javac
-JVM= java 
+JVM= java
 FILE=
 
 .SUFFIXES: .java .class
@@ -33,6 +33,10 @@ classes: $(CLASSES:.java=.class)
 run: $(MAIN).class
 	$(JVM) -classpath ${CLASSPATH} $(MAIN)
 
+#
+# For the next ones you must invoke make directly
+# as from the build shell script they won't work
+#
 clean:
 	$(RM) *.class
 
