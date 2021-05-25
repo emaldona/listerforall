@@ -20,19 +20,31 @@ This project has the following dependencies:
 
 To install these dependencies on Fedora, execute the following:
 
-    sudo dnf install apache-commons-codec apache-commons-lang gcc-c++ \
-                     java-devel jpackage-utils slf4j zlib-devel \
-                     glassfish-jaxb-api nss-tools nss-devel cmake \
-                     junit
+    sudo dnf build-dep jss
+
+while for debian:
+
+    sudo apt build-dep jss
 
 Building
 ========================================
-To build the capabilities lister:
+To build ListerForAll:
 
     git clone https://github.com/emaldona/listerforall.git
     cd listerforall
-    and launch build.sh [with-some-options]
+    Launch build.sh [with-some-options]
     where ./build.sh -h will enumerate the options
+
+	Usage: build.sh [-h] [-b] [-s] [-t]
+
+	This script builds ListerForAll application with make.
+
+	ListerForAll build tool options:
+
+	-h               display this help and exit
+	-b               path to where jss was built
+	-s               path to slf4j jar file, either system's or latest built
+	-t               target for makefile [ empty for build | run ]
 
 LIMITATIONS:
 ========================================
@@ -40,16 +52,9 @@ Using cmake:
 Currently doesn't work.
 
 Using make:
-This currently works on Fedora and Debian 10. For debian you need to install cmake
+This currently works on Fedora and Debian. For debian you need to install cmake
 from the testing repo as the one installed by default is an older version than
 the one required. Other packages may be needed from testing as well.
 It also works on openSUSE Tumbleweed where some manual adjustments are needed
 when building against system-installed JSS. For the needed changes
 see the adjustements4openSUSE.txt file in this directory.
-
-TODO:
-#################################################
-- Explore using cmake, as JSS does, as it should allow us to detect environment
-  variables and thus make it easier to enable supporting other distros
-  but for now ./build.sh and systemBuild.sh work okay
-- Add support for other Linux distributions as they are requested
