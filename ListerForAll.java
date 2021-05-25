@@ -40,7 +40,31 @@ import org.slf4j.LoggerFactory;
  */
 public class ListerForAll {
 
-    // start Capabilities inner class
+    /* Inner class to use existing system nss database
+     */
+    public static class UseSystemDB {
+       /* Same location in the Linux distros we have tested
+        */
+        public static String NSS_DB_LOCATION = "/etc/pki/nssdb";
+        private UseSystemDB() {}
+        /* Only a static method */
+
+        /* Method adapted from one used in the candlepin projects
+         * https://github.com/candlepin/candlepin/pull/2370/files#diff-170cc2e1af322c9796d4d8fe20e32bb0R98
+         * an approach that was suggested by Alexander Scheel
+         */
+        public static void addJSSProvider() throws Exception {
+            Capabilities.logger.debug("Starting call to JSSProviderLoader.addProvider()...");
+            InitializationValues ivs = new InitializationValues(NSS_DB_LOCATION);
+            ivs.noCertDB = true;
+            ivs.installJSSProvider = true;
+            ivs.initializeJavaOnly = false;
+            CryptoManager.initialize(ivs);
+            CryptoManager cm = CryptoManager.getInstance();
+        }
+    }
+
+    // start of the Capabilities inner class
 
     /**
      * List the available capabilities for ciphers, key agreement, macs, message
@@ -59,42 +83,16 @@ public class ListerForAll {
         public static String briefFileBase = "listings/brief/Capabilities4";
         public static String verboseFileBase = "listings/verbose/Capabilities4";
 
-        /* Inner class to use existing system nss database
-         */
-        public static class UseSystemDB {
-            /* Same location in the Linux distros we have tested
-             */
-            public static String NSS_DB_LOCATION = "/etc/pki/nssdb";
-            private UseSystemDB() {}
-            /* Only a static method */
-
-           /* Method adapted from one used in the candlepin projects
-            * https://github.com/candlepin/candlepin/pull/2370/files#diff-170cc2e1af322c9796d4d8fe20e32bb0R98
-            * an approach that was suggested by Alexander Scheel
-            */
-            public static void addJSSProvider() throws Exception {
-                logger.debug("Starting call to JSSProviderLoader.addProvider()...");
-                InitializationValues ivs = new InitializationValues(NSS_DB_LOCATION);
-                ivs.noCertDB = true;
-                ivs.installJSSProvider = true;
-                ivs.initializeJavaOnly = false;
-                CryptoManager.initialize(ivs);
-                CryptoManager cm = CryptoManager.getInstance();
-            }
-        }
-
         public Capabilities() {
         }
 
         /* List capabilites of the specified provider */
         public void listCapabilities(FileWriter fw, Provider p) throws Exception {
 
-            String pName = p.getName();
             Set<Object> keySet = p.keySet();
             assert(keySet != null);
             Iterator it = keySet.iterator();
             assert(it != null);
-            it = p.keySet().iterator();
 
             // In the verbose listing, we want to create a mapping from
             // an implementation onto all of its aliases. To do this in one
@@ -175,32 +173,24 @@ public class ListerForAll {
             }
 
             // Validate that CryptoManager registers jss as a provider.
-            assert(jssIsRegistered(Security.getProviders()) == true);
+            if (!jssIsRegistered(Security.getProviders())) {
+                throw new Exception("JSS is not registered");
+            }
         }
 
         public boolean createOutputDirs() throws Exception {
+           /* Create hierarchy of directores for the results */
 
-           try {
-                /* Create hierarchy of directores for the results */
+           File dir4Listings = new File("listings");
+           dir4Listings.mkdir();
 
-                File dir4Listings = new File(System.getProperty("user.dir").concat("/listings"));
-                dir4Listings.mkdir();
+           File dir4verboseListings = new File("listings/verbose");
+           dir4verboseListings.mkdir();
 
-                File dir4verboseListings = 
-                    new File(System.getProperty("user.dir").concat("/listings/verbose"));
-                    dir4verboseListings.mkdir();
+           File dir4briefListings = new File("listings/brief");
+           dir4briefListings.mkdir();
 
-                File dir4briefListings = 
-                    new File(System.getProperty("user.dir").concat("/listings/brief"));
-                dir4briefListings.mkdir();
-
-                return true;
-
-            } catch (Exception e) {
-                logger.info("Exception caught in createOutputDirs: " + e.getMessage(), e);
-                logger.info("Keep going");
-                return false;
-            }
+           return true;
         }
 
         /* List providers capabilities using the brief listing method which adds
@@ -245,16 +235,12 @@ public class ListerForAll {
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            Capabilities lister = new Capabilities();
-            if (!lister.createOutputDirs()) return;
-            lister.addJssProvider();
-            Provider ps[] = Security.getProviders();
-            lister.listBrief(ps);
-            lister.listVerbose(ps);
-        } catch (Exception e) {
-            Capabilities.logger.info("Exception caught in main: " + e.getMessage(), e);
-        }
+    public static void main(String[] args) throws Exception {
+        Capabilities lister = new Capabilities();
+        if (!lister.createOutputDirs()) return;
+        lister.addJssProvider();
+        Provider ps[] = Security.getProviders();
+        lister.listBrief(ps);
+        lister.listVerbose(ps);
     }
 }
