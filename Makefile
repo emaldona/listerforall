@@ -40,6 +40,9 @@ run: $(MAIN).class
 clean:
 	$(RM) *.class
 
+remove-nssdb:
+	$(RM) -r ${BUILDROOT}/jss/build/results/nssdb
+
 remove-listings:
 	$(RM) -r listings
 
