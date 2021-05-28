@@ -11,7 +11,7 @@ show_help()
     exit
 }
 
-makefile2use=Makefile
+makefile2usePrefix=""
 buildroot=${HOME}/buildjss
 target4make=run
 
@@ -26,7 +26,7 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   -s | --slf4jpath )
     shift; slf4jpath=$1
     ;;
-  -m | --makefile2use)
+  -m | --makefile2usePrefix)
     shift; target4make=$1
     ;;
   -t | --target4make)
@@ -71,5 +71,5 @@ fi
 BUILDROOT=${buildroot} \
 SLF4JPATH=${slf4jpath} \
 TARGET4MAKE=${target4make} \
-make -f ${makefile2use} ${target4make}
+make -f ${makefile2usePrefix}Makefile ${target4make}
 
