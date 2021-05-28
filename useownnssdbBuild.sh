@@ -11,6 +11,7 @@ show_help()
     exit
 }
 
+makefile2use=Makefile
 buildroot=${HOME}/buildjss
 target4make=run
 
@@ -24,6 +25,9 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
     ;;
   -s | --slf4jpath )
     shift; slf4jpath=$1
+    ;;
+  -m | --makefile2use)
+    shift; target4make=$1
     ;;
   -t | --target4make)
     shift; target4make=$1
@@ -67,5 +71,5 @@ fi
 BUILDROOT=${buildroot} \
 SLF4JPATH=${slf4jpath} \
 TARGET4MAKE=${target4make} \
-make -f useownnssdbMakefile ${removeNssdb} ${target4make}
+make -f ${makefile2use} ${target4make}
 

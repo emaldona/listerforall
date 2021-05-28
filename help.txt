@@ -6,6 +6,8 @@ Capabilities build tool options:
 
     -h               display this help and exit
     -b               path to where jss was built
+    -m               makefile to use [Makefile | useownnssdbMakefile | systemjssMakefile]
+                        will use Makefile by default
     -s               path to slf4j jar file, either system's or latest built
     -t               target for makefile [ empty for build | run ]
 
