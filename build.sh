@@ -64,7 +64,7 @@ else
 fi
 
 # check the type of build
-if [[ "${prefix}" == "usenssdb" ]]; then
+if [[ "${prefix}" == "" ]]; then
     echo "Default build type"
 elif [[ "${prefix}" == "usenssdb" ]]; then
     echo "build using nssdb"
