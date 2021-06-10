@@ -11,8 +11,7 @@ show_help()
     exit
 }
 
-# defaults
-prefix=""
+makefile2use=Makefile
 buildroot=${HOME}/buildjss
 target4make=run
 
@@ -27,8 +26,8 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   -s | --slf4jpath )
     shift; slf4jpath=$1
     ;;
-  -m | --makefile2usePrefix)
-    shift; prefix=$1
+  -m | --makefile2use)
+    shift; target4make=$1
     ;;
   -t | --target4make)
     shift; target4make=$1
@@ -63,17 +62,6 @@ else
     exit
 fi
 
-# check the type of build
-if [[ "${prefix}" == "usenssdb" ]]; then
-    echo "Default build type"
-elif [[ "${prefix}" == "usenssdb" ]]; then
-    echo "build using nssdb"
-elif [[ "${prefix}" == "systemjss" ]]; then
-    echo "build using sytemjss"
-else
-    echo "Unsupported build type"
-    exit
-fi
 # Now make
 
 removeNssdb=
@@ -83,5 +71,5 @@ fi
 BUILDROOT=${buildroot} \
 SLF4JPATH=${slf4jpath} \
 TARGET4MAKE=${target4make} \
-make -f ${prefix}Makefile ${target4make}
+make -f ${makefile2use} ${target4make}
 

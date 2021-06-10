@@ -1,6 +1,5 @@
 # Invoked by useownnssdbBuild.sh script where the user can set
 # the BUILDROOT and SLF4JPATH for the makefile and the target
-# and which Makefile to use
 # Supports using the nssdb from the latest build
 
 export LD_LIBRARY_PATH=${BUILDROOT}/jss/build:/usr/share/java
