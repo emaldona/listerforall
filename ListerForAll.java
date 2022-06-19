@@ -1,4 +1,4 @@
-//package org.mozilla.jss.samples;
+//package org.mozilla.jss.tests;
 
 import java.security.Security;
 import java.security.Provider;
