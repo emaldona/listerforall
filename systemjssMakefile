@@ -6,7 +6,7 @@
 
 # settings to use system jss in fedora 30
 librarypath4fedora=/usr/lib64:/usr/lib64/jss:/usr/share/java
-classpath4fedora=.:/usr/lib/java/jss4.jar:/usr/share/java/slf4j/api.jar
+classpath4fedora=.:/usr/lib/java/jss.jar:/usr/share/java/slf4j/api.jar
 
 # settings to use system jss in debian 9
 librarypath4debian9=/usr/lib64:/usr/lib64/jss:/usr/share/java

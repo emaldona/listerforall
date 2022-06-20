@@ -2,7 +2,7 @@
 # the BUILDROOT and SLF4JPATH for the makefile and the target
 
 export LD_LIBRARY_PATH=${BUILDROOT}/jss/build:/usr/share/java
-export CLASSPATH=.:${BUILDROOT}/jss/build/jss4.jar:${SLF4JPATH}
+export CLASSPATH=.:${BUILDROOT}/jss/build/jss.jar:${SLF4JPATH}
 
 
 JFLAGS = -g  -classpath ${CLASSPATH} -sourcepath . -d .
