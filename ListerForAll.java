@@ -44,7 +44,7 @@ public class ListerForAll {
          * an approach that was suggested by Alexander Scheel
          */
         public static void addJSSProvider() throws Exception {
-            Capabilities.logger.debug("Starting call to JSSProviderLoader.addProvider()...");
+            ListerForAll.logger.debug("Starting call to JSSProviderLoader.addProvider()...");
             InitializationValues ivs = new InitializationValues(NSS_DB_LOCATION);
             ivs.noCertDB = true;
             ivs.installJSSProvider = true;
@@ -54,7 +54,7 @@ public class ListerForAll {
         }
     }
 
-    // start of the Capabilities inner class
+    // start of the ListerForAll inner class
 
     /**
      * List the available capabilities for ciphers, key agreement, macs, message
@@ -73,7 +73,7 @@ public class ListerForAll {
         public static String briefFileBase = "listings/brief/Capabilities4";
         public static String verboseFileBase = "listings/verbose/Capabilities4";
 
-        public Capabilities() {
+        public ListerForAll() {
         }
 
         /* List capabilites of the specified provider */
@@ -226,7 +226,7 @@ public class ListerForAll {
     }
 
     public static void main(String[] args) throws Exception {
-        Capabilities lister = new Capabilities();
+        ListerForAll lister = new ListerForAll();
         if (!lister.createOutputDirs()) return;
         lister.addJssProvider();
         Provider ps[] = Security.getProviders();
