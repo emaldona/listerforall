@@ -69,7 +69,7 @@ if [[ "${prefix}" == "" ]]; then
 elif [[ "${prefix}" == "usenssdb" ]]; then
     echo "build using nssdb"
 elif [[ "${prefix}" == "systemjss" ]]; then
-    echo "build using sytemjss"
+    echo "build using systemjss"
 else
     echo "Unsupported build type"
     exit
