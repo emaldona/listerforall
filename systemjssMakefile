@@ -1,5 +1,5 @@
 # Makefile that uses the system installed jss
-# Invoked by systemjssBuild.sh script where the user can set
+# Invoked by build.sh script where the user can set
 # the BUILDROOT and SLF4JPATH for the makefile and the target
 
 # The following will change as the various distros get upgraded
@@ -60,7 +60,7 @@ run: $(MAIN).class
 
 #
 # For the next ones you must invoke make directly
-# as from the build shell scripts they won't work
+# as from the build shell script they won't work
 #
 clean:
 	$(RM) *.class
