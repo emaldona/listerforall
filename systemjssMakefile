@@ -18,7 +18,7 @@ classpath4debian10=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j-api.jar
 
 # settings to use system jss in ubuntu 19
 librarypath4ubuntu=/usr/lib64:/usr/lib64/jss:/usr/share/java
-classpath4ubuntu=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j/api.jar
+classpath4ubuntu=.:/usr/share/java/jss.jar:/usr/share/java/slf4j/api.jar
 
 # settings to use system jss in openSUSE
 librarypath4opensuse=/usr/lib64:/usr/share/java
