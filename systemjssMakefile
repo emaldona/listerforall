@@ -20,9 +20,9 @@ classpath4debian10=.:/usr/share/java/jss-4.5.1.jar:/usr/share/java/slf4j-api.jar
 librarypath4ubuntu=/usr/lib64:/usr/lib64/jss:/usr/share/java
 classpath4ubuntu=.:/usr/share/java/jss.jar:/usr/share/java/slf4j/api.jar
 
-# settings to use system jss in openSUSE
+# settings to use system jss in openSUSE Tumbleweed
 librarypath4opensuse=/usr/lib64:/usr/share/java
-classpath4opensuse=.:/usr/lib64/java/jss4-4.5.0.jar:/usr/share/java/slf4j/api.jar
+classpath4opensuse=.:/usr/lib64/java/jss.jar:/usr/share/java/slf4j/api.jar
 
 #
 # change these two to the ones you wish to use
