@@ -1,5 +1,5 @@
 # Makefile that uses the system installed jss
-# Invoked by build.sh script where the user can set
+# Invoked by build.sh script where user sets the BUILDTYPE,
 # the BUILDROOT and SLF4JPATH for the makefile and the target
 
 # The following will change as the various distros get upgraded
@@ -64,6 +64,13 @@ run: $(MAIN).class
 #
 clean:
 	$(RM) *.class
+
+remove-nssdb:
+	if [[ $BUILDTYPE == "USING_SYSTEM_NSSDB" ]] ; then 
+		echo "Removing the system nssdb not supported"
+	else
+		$(RM) -r ${BUILDROOT}/jss/build/results/nssdb
+	fi
 
 remove-listings:
 	$(RM) -r listings

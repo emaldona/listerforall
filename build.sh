@@ -64,12 +64,18 @@ else
 fi
 
 # check the type of build
+BUILD_TYPE=""
 if [[ "${prefix}" == "" ]]; then
     echo "Default build type"
+    BUILD_TYPE="DEFAULT"
 elif [[ "${prefix}" == "usenssdb" ]]; then
     echo "build using nssdb"
+    # which is actually the same a default makefile
+    prefix = ""
+    BUILD_TYPE="USING_OWN_NSSDB"
 elif [[ "${prefix}" == "systemjss" ]]; then
     echo "build using systemjss"
+    BUILD_TYPE="USING_SYSTEM_NSSDB"
 else
     echo "Unsupported build type"
     exit
@@ -80,6 +86,7 @@ removeNssdb=
 if [[ "$target4make" == "run" ]]; then 
     removeNssdb=remove-nssdb 
 fi
+BUILDTYPE="${BUILD_TYPE}" \
 BUILDROOT=${buildroot} \
 SLF4JPATH=${slf4jpath} \
 TARGET4MAKE=${target4make} \
