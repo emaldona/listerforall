@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# Modified build.sh to use own nssdb from latest build
-
 cwd=$(cd $(dirname $0); pwd -P)
 
 # Usage info
@@ -80,6 +78,7 @@ else
     echo "Unsupported build type"
     exit
 fi
+
 # Now make
 
 removeNssdb=
