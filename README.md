@@ -54,5 +54,5 @@ Currently doesn't work.
 Using make:
 This currently works on Fedora and Debian. It also works on openSUSE Tumbleweed
 where some manual adjustments are needed when building against system-installed
-JSS. For the needed changes see the adjustements4openSUSE.txt file in this
+JSS. For the needed changes see the adjustments4openSUSE.txt file in this
 directory.
