@@ -1,12 +1,12 @@
 Usage: build.sh [-h] [-b] [-s] [-t]
 
-This script builds capabilites apps with make.
+This script builds capabilities list application with make.
 
 Capabilities build tool options:
 
     -h               display this help and exit
     -b               path to where jss was built
-    -m               makefile to use prefix [ empty for Makefile | useownnssdb | systemjss]
+    -m               makefile to use prefix [ empty for Makefile | systemjss ]
     -s               path to slf4j jar file, either system's or latest built
     -t               target for makefile [ empty for build | run ]
 

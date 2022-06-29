@@ -66,11 +66,6 @@ BUILD_TYPE=""
 if [[ "${prefix}" == "" ]]; then
     echo "Default build type"
     BUILD_TYPE="DEFAULT"
-elif [[ "${prefix}" == "usenssdb" ]]; then
-    echo "build using nssdb same as default"
-    # which is actually the same as default makefile
-    prefix=""
-    BUILD_TYPE=""
 elif [[ "${prefix}" == "systemjss" ]]; then
     echo "build using systemjss"
     BUILD_TYPE="USING_SYSTEM_NSSDB"
