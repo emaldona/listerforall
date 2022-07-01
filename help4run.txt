@@ -1,0 +1,14 @@
+Usage: runit.sh [-h] [-b] [-s] [-t]
+
+This script runs CapabilitiesList test.
+
+Capabilities run tool options:
+
+    -h               display this help and exit
+    -b               path to where jss was built (such as $HOME/buildjss/jss)
+    -s               path to slf4j jar file, either system's or latest built
+
+
+Since './runit.sh -t clean' is not working, use the Makefile directly to
+remove classes and/or the listings directory.
+
