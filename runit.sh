@@ -87,10 +87,6 @@ removeNssdb=
 if [[ "$target4make" == "run" ]]; then 
     removeNssdb=remove-nssdb 
 fi
-BUILDTYPE="${BUILD_TYPE}" \
-BUILDROOT=${buildroot} \
-TANDJPATH=${testandjsspath} \
-SLF4JPATH=${slf4jpath} \
-TARGET4MAKE=${target4make} \
+
 java -classpath ${testandjsspath}:${slf4jpath} org.mozilla.jss.tests.CapabilitiesList
 
