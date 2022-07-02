@@ -56,3 +56,10 @@ This currently works on Fedora and Debian. It also works on openSUSE Tumbleweed
 where some manual adjustments are needed when building against system-installed
 JSS. For the needed changes see the adjustments4openSUSE.txt file in this
 directory.
+
+WORK IN PRROGRESS:
+========================================
+As an aternative to using ListerForAll application one can also run the
+CapabilitiesList test application that is part of the jss build. For this
+use the runit.sh shell script.
+
