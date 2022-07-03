@@ -19,7 +19,8 @@ show_help()
 prefix=""
 buildroot=${HOME}/buildjss
 target4make=run
-testandjsspath=${buildroot}/jss/build/jss.jar:${buildroot}/jss/build/tests-jss.jar
+testpath=${buildroot}/jss/build/tests-jss.jar
+jsspath=${buildroot}/jss/build/jss.jar
 
 #
 # Parse command line arguments.
@@ -88,5 +89,5 @@ if [[ "$target4make" == "run" ]]; then
     removeNssdb=remove-nssdb 
 fi
 
-java -classpath ${testandjsspath}:${slf4jpath} org.mozilla.jss.tests.CapabilitiesList
+java -classpath ${testpath}:${jsspath}:${slf4jpath} org.mozilla.jss.tests.CapabilitiesList
 
