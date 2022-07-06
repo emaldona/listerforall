@@ -2,8 +2,8 @@
 
 # Similar to the build.sh script but instead of building
 # our own app it just executes the CapabilitiesList test
-# that was already built as part the jss build
-#
+# that was already built as part the jss build and if one
+# needs to use sytem-intsalled jss the use runits.sh
 
 cwd=$(cd $(dirname $0); pwd -P)
 
@@ -15,7 +15,6 @@ show_help()
 }
 
 # defaults
-prefix=""
 buildroot=${HOME}/buildjss
 target4make=run
 testpath=${buildroot}/jss/build/tests-jss.jar
@@ -63,11 +62,6 @@ else
 fi
 
 # Now run the CapabilitiesList app
-
-removeNssdb=
-if [[ "$target4make" == "run" ]]; then 
-    removeNssdb=remove-nssdb 
-fi
 
 java -classpath ${testpath}:${jsspath}:${slf4jpath} org.mozilla.jss.tests.CapabilitiesList
 

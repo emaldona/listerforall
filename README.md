@@ -61,5 +61,6 @@ WORK IN PRROGRESS:
 ========================================
 As an aternative to using ListerForAll application one can also run the
 CapabilitiesList test application that is part of the jss build. For this
-use the runit.sh shell script.
+use the runit.sh shell script if the buildroot version of jss is desired
+or runits.sh if the system installed jss is the one deired
 

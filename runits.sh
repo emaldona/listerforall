@@ -17,7 +17,6 @@ show_help()
 }
 
 # defaults
-prefix=""
 buildroot=${HOME}/buildjss
 target4make=run
 testpath=${buildroot}/jss/build/tests-jss.jar
@@ -57,26 +56,18 @@ isOpenSUSE=`grep opensuse /etc/os-release`
 if [[ "${isOpenSUSE}" != '' ]]; then
     echo "openSUSE build"
     slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/slf4j-jdk14.jar
-    jsspath=/usr/lib64/java/jss.jar
 elif [[ "${isDebian}" != '' ]]; then
     echo "Debian build"
     slf4jpath=/usr/share/java/slf4j-api.jar:/usr/share/java/jdk14.jar
-    jsspath=/usr/share/java/jss.jar
 elif [[ "${isFedora}" != '' ]]; then
     echo "Fedora build"
     slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
-    jsspath=/usr/lib64/jss/jss.jar
 else
     echo "Unsupported distribution"
     exit
 fi
 
 # Now run the CapabilitiesList app
-
-removeNssdb=
-if [[ "$target4make" == "run" ]]; then
-    removeNssdb=remove-nssdb
-fi
 
 java -classpath ${testpath}:${jsspath}:${slf4jpath} org.mozilla.jss.tests.CapabilitiesList
 
