@@ -1,0 +1,17 @@
+Usage: runits.sh [-h] [-b] [-s] [-t]
+
+This script runs CapabilitiesList test
+againts the system-installed jss instead
+of the one just built
+
+Capabilities run tool options:
+
+    -h               display this help and exit
+    -b               path to where tests-jss were built (such as $HOME/buildjss/jss)
+    -s               path to system's slf4j jar files
+    -j               path to system's jss jar file
+
+
+Since 'clean' is not working, use the Makefile directly to
+remove classes and/or the listings directory.
+
