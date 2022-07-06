@@ -4,7 +4,6 @@
 # our own app it just executes the CapabilitiesList test
 # that was already built as part the jss build
 #
-# TODO: Simplify as there are targets that don't make senese
 
 cwd=$(cd $(dirname $0); pwd -P)
 
@@ -33,12 +32,6 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   -s | --slf4jpath )
     shift; slf4jpath=$1
     ;;
-  -m | --makefile2usePrefix)
-    shift; prefix=$1
-    ;;
-  -t | --target4make)
-    shift; target4make=$1
-    ;;
   -b | --buildroot )
     buildroot=$1
     ;;
@@ -66,19 +59,6 @@ elif [[ "${isFedora}" != '' ]]; then
     slf4jpath=/usr/share/java/slf4j/api.jar:/usr/share/java/slf4j/jdk14.jar
 else
     echo "Unsupported distribution"
-    exit
-fi
-
-# check the type of build
-BUILD_TYPE=""
-if [[ "${prefix}" == "" ]]; then
-    echo "Default build type"
-    BUILD_TYPE="DEFAULT"
-elif [[ "${prefix}" == "systemjss" ]]; then
-    echo "build using systemjss"
-    BUILD_TYPE="USING_SYSTEM_NSSDB"
-else
-    echo "Unsupported build type"
     exit
 fi
 
