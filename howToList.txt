@@ -1,0 +1,15 @@
+To determine the path to the system-installed jss files in various Linux distros
+you can do the following:
+Fedora:
+   since F37: rpm -ql dogtag-jss 
+   while on earlier releases it's rpm -ql jss
+Debian:
+   dpkg -L libjss-java
+openSUSE Tumbleweed:
+   rpm -ql mozilla-jss
+
+Adding `| grep jar` to the above will narrow down the list to only jar files and
+you'll see in some cases that some are symbolic links to other ones.
+
+Similarly for slf4j.
+
