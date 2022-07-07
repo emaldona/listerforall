@@ -11,7 +11,5 @@ Capabilities run tool options:
     -s               path to system's slf4j jar files
     -j               path to system's jss jar file
 
-
-Since 'clean' is not working, use the Makefile directly to
-remove classes and/or the listings directory.
-
+howToList.txt shows how to list files from an installed
+package on various Linux distributions.

@@ -9,6 +9,5 @@ Capabilities run tool options:
     -s               path to slf4j jar file, either system's or latest built
 
 
-Since './runit.sh -t clean' is not working, use the Makefile directly to
-remove classes and/or the listings directory.
-
+howToList.txt shows how to list files from an installed
+package on various Linux distributions.
