@@ -1,4 +1,4 @@
-Usage: runit.sh [-h] [-b] [-s] [-t]
+Usage: runit.sh [-h] [-b] [-s]
 
 This script runs CapabilitiesList test.
 

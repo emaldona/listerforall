@@ -1,4 +1,4 @@
-Usage: runits.sh [-h] [-b] [-s] [-t]
+Usage: runits.sh [-h] [-b] [-s] [-j]
 
 This script runs CapabilitiesList test
 againts the system-installed jss instead
