@@ -57,10 +57,10 @@ where some manual adjustments are needed when building against system-installed
 JSS. For the needed changes see the adjustments4openSUSE.txt file in this
 directory.
 
-WORK IN PRROGRESS:
+WORK IN PROGRESS:
 ========================================
-As an aternative to using ListerForAll application one can also run the
-CapabilitiesList test application that is part of the jss build. For this
-use the runit.sh shell script if the buildroot version of jss is desired
-or runits.sh if the system installed jss is the one deired
+As an aternative to using the ListerForAll application one can also run the
+CapabilitiesList test application that is part of the jss build. For this, you
+can use either the runit.sh shell script if the buildroot version of jss is 
+desired or runits.sh if the system installed jss is the one desired.
 
